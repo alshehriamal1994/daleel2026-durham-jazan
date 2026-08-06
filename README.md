@@ -1,27 +1,32 @@
 # Durham-Jazan at Daleel 2026
 
-Code and synthetic data for the Durham-Jazan system description paper at the
-**Daleel 2026 shared task on Arabic Argumentative Discourse Mining** (ArabicNLP 2026, co-located with EMNLP 2026).
+This repository accompanies the Durham-Jazan system description paper for the
+**Daleel 2026 shared task on Arabic Argumentative Discourse Mining** (ArabicNLP 2026,
+held with EMNLP 2026). It contains our code, our synthetic training data, and the
+scripts behind every figure and analysis in the paper.
 
-<p align="center"><img src="assets/example.png" width="420" alt="Gold span annotation example"></p>
+**Paper:** *Durham-Jazan at Daleel 2026: Domain-Routed Ensembles, LLM Augmentation, and the
+Limits of Decision Rule Tuning for Arabic Argument Mining.* Amal Saad Alshehri, Nelly Bencomo,
+and Amir Atapour-Abarghouei.
 
-Our campaign's central finding, in one picture: changes to the model or its data delivered
-what validation promised, while tuning of decision rules on top did not.
+<p align="center"><img src="assets/example.png" width="420" alt="A gold span annotation from the development set"></p>
 
-<p align="center"><img src="assets/transfer.png" width="480" alt="Promised vs delivered gains per intervention"></p>
+The central finding of our participation is summarised in one figure. Changes to the model
+or its data delivered what validation promised, while tuning of the decision rules on top
+did not.
 
-## Try the core idea in 30 seconds
+<p align="center"><img src="assets/transfer.png" width="480" alt="Promised and delivered gains for each intervention"></p>
 
-The paper's *segment-concatenation generation* recipe lets an LLM produce span-annotated
-training data with exact character offsets and no alignment step:
+## A short demonstration
+
+The paper introduces *segment-concatenation generation*, a recipe that lets a large
+language model produce span-annotated training data with exact character offsets and
+no alignment step. The following command builds and verifies one such paragraph from
+the data in this repository.
 
 ```bash
 python demo_segment_concat.py
 ```
-
-**Paper:** *Durham-Jazan at Daleel 2026: Domain-Routed Ensembles, LLM Augmentation, and the
-Limits of Decision-Layer Tuning for Arabic Argument Mining* — Amal Saad Alshehri, Nelly Bencomo,
-Amir Atapour-Abarghouei.
 
 ## Final official results
 
@@ -32,7 +37,7 @@ Amir Atapour-Abarghouei.
 | Task 1 Closed | 0.657 macro-F1 | 5th |
 | Task 1 Open | 0.669 macro-F1 | 2nd |
 
-Development phase: first on both Open leaderboards.
+In the development phase we finished first on both Open leaderboards.
 
 ## Setup
 
@@ -40,56 +45,59 @@ Development phase: first on both Open leaderboards.
 pip install -r requirements.txt
 ```
 
-The official task data and scoring scripts are **not** redistributed here — obtain them from the
-organizers (https://qatardebate.org/programs/academic-programs/daleel2026-shared-task and the
-task CodaBench pages) and place `train_task_1.jsonl`, `train_task_2.jsonl`, `dev_in.jsonl`, etc.
-under `data/`. Scripts expect the working-directory layout used in the paper
-(`data/`, `models/`, `oof/`, `preds/`); adjust the path constants at the top of each script.
+The official task data and scoring scripts are not redistributed here. They are available
+from the organisers through the task pages at
+https://qatardebate.org/programs/academic-programs/daleel2026-shared-task and CodaBench.
+Place `train_task_1.jsonl`, `train_task_2.jsonl`, `dev_in.jsonl`, and related files under
+`data/`. The scripts expect the working directory layout used in the paper, namely
+`data/`, `models/`, `oof/`, and `preds/`, and the path constants at the top of each script
+can be adjusted as needed.
 
-## Synthetic data (`data/`)
+## Synthetic data
 
-Synthetic training data generated with a proprietary LLM, used **in training only**; thresholds and
-all held-out evaluation use real data exclusively. Task 2 paragraphs were authored as ordered labeled
-segments and joined with single spaces, so character offsets are exact by construction
-(*segment-concatenation generation*; paper §3.3).
+The `data/` directory holds the synthetic training data generated with a proprietary
+large language model. It was used in training only, and thresholds and all held-out
+evaluation used real data exclusively. For Task 2 the paragraphs were authored as ordered
+labelled segments and joined with single spaces, so the character offsets are exact by
+construction (paper, Section 3.3).
 
 | File | Task | Contents |
 |---|---|---|
 | `synth_all.jsonl` | 1 | 171 multi-label paragraphs (development phase) |
-| `synth_v2/` | 1, 2 | evaluation-phase additions (Task 1 → 291 total; Task 2 segment batches) |
+| `synth_v2/` | 1 and 2 | evaluation-phase additions (Task 1 grows to 291 in total) |
 | `synth2_all.jsonl` | 2 | 88 span-annotated paragraphs (development phase) |
-| `synth2_v2_built.jsonl` | 2 | 158 span-annotated paragraphs, offsets verified (evaluation phase) |
+| `synth2_v2_built.jsonl` | 2 | 158 span-annotated paragraphs with verified offsets |
 
-## Reproducing the final systems (`src/`)
+## Reproducing the final systems
 
 | System | Key scripts |
 |---|---|
-| Task 2 Closed (0.729) | `train_task2_cv.py` → `ensemble_task2_camel.py` / `ensemble_task2_marbert.py` → `test_task2_closed_v3.py` (domain-routed 8+8 seeds) + span compaction (grid in `t2_closed_recal.py`) |
-| Task 2 Open (0.736) | above + synthetic spans (`predict_task2_open.py`) + cross-family char-level blend (`t2_blend_build.py`) |
-| Task 1 Closed (0.657) | `dapt.py` / `dapt_v2.py` (domain-adaptive pretraining), `backtranslate.py` + `rare_bt_gen.py` (augmentation), `dapt_rare_submit.py` (encoder ensemble), `t1_llm_sft.py` (Qwen3-32B QLoRA; editorial routing) |
-| Task 1 Open (0.669) | above + synthetic paragraphs (`open_submit.py`) + Task-2→Task-1 span fusion |
+| Task 2 Closed (0.729) | `train_task2_cv.py`, then `ensemble_task2_camel.py` and `ensemble_task2_marbert.py`, then `test_task2_closed_v3.py` for the domain-routed ensemble, with span compaction from `t2_closed_recal.py` |
+| Task 2 Open (0.736) | the above plus synthetic spans (`predict_task2_open.py`) and the char-level blend (`t2_blend_build.py`) |
+| Task 1 Closed (0.657) | `dapt.py` and `dapt_v2.py` for domain-adaptive pretraining, `backtranslate.py` and `rare_bt_gen.py` for augmentation, `dapt_rare_submit.py` for the encoder ensemble, and `t1_llm_sft.py` for the Qwen3-32B routing |
+| Task 1 Open (0.669) | the above plus synthetic paragraphs (`open_submit.py`) and span fusion from Task 2 |
 
-Validation utilities: `clean_holdout.py`, `model_search.py`, `dapt_eval.py`, `rare_aug_eval.py`, `ens_check.py`.
-
-`paper_analysis/` contains the scripts behind the paper's transfer plot (Fig. 2), per-class table,
-bootstrap analyses, and Arabic example figures. `PROMPTS.md` documents the Qwen3 fine-tuning
-prompt and the synthetic-data generation templates (including the segment-concatenation format).
+Validation utilities include `clean_holdout.py`, `model_search.py`, `dapt_eval.py`,
+`rare_aug_eval.py`, and `ens_check.py`. The `paper_analysis/` directory contains the
+scripts behind the paper's transfer figure, the per-class table, the bootstrap analyses,
+and the Arabic example figures. `PROMPTS.md` documents the fine-tuning prompt and the
+synthetic-data generation templates.
 
 ## Hardware
 
-RTX 4080 SUPER 16 GB (all encoder work, LLMs ≤14B); one A100 80 GB via SLURM for Qwen3-32B
-(~6 GPU-hours).
+One RTX 4080 SUPER with 16 GB served all encoder work and models of up to 14B parameters.
+One A100 with 80 GB ran Qwen3-32B for about six GPU hours.
 
-## License
+## Licence
 
-Code: MIT. Synthetic data: CC-BY-4.0. The official task data belongs to the Daleel 2026
-organizers and is not included.
+The code is released under the MIT licence and the synthetic data under CC-BY-4.0.
+The official task data belongs to the Daleel 2026 organisers and is not included.
 
 ## Citation
 
 ```bibtex
 @inproceedings{durham-jazan-daleel2026,
-  title  = "Durham-Jazan at Daleel 2026: Domain-Routed Ensembles, LLM Augmentation, and the Limits of Decision-Layer Tuning for Arabic Argument Mining",
+  title  = "Durham-Jazan at Daleel 2026: Domain-Routed Ensembles, LLM Augmentation, and the Limits of Decision Rule Tuning for Arabic Argument Mining",
   author = "Alshehri, Amal Saad and Bencomo, Nelly and Atapour-Abarghouei, Amir",
   booktitle = "Proceedings of ArabicNLP 2026",
   year   = "2026"
