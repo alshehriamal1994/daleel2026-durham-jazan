@@ -37,7 +37,10 @@ fig, ax = plt.subplots(figsize=(3.03, 2.28))
 ax.plot([0, 6.3], [0, 6.3], ls=(0, (4, 3)), lw=0.8, color="#999999", zorder=1)
 ax.text(4.35, 4.95, "perfect transfer", rotation=19, fontsize=7, color="#777777",
         ha="center", va="bottom")
+ax.axhspan(-4.9, 0, color="#D55E00", alpha=0.045, zorder=0)
 ax.axhline(0, lw=0.6, color="#bbbbbb", zorder=1)
+ax.text(-0.28, -4.55, "promised, not delivered", fontsize=6.6, color="#a06030",
+        style="italic", ha="left", va="bottom")
 
 for name, x, y, lx, ly, ha in model:
     ax.scatter(x, y, s=34, marker="o", color=BLUE, edgecolors="white",
@@ -53,7 +56,8 @@ ax.set_ylim(-4.9, 10.5)
 ax.set_xlabel("validation gain (F1 points)")
 ax.set_ylabel("realized leaderboard gain (F1 points)")
 ax.spines[["top", "right"]].set_visible(False)
-ax.tick_params(length=2.5)
+ax.tick_params(length=2.5, color="#999999")
+for s in ["left","bottom"]: ax.spines[s].set_color("#999999")
 
 handles = [
     Line2D([], [], marker="o", ls="", color=BLUE, markeredgecolor="white",
