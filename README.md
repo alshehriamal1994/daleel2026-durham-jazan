@@ -32,7 +32,7 @@ Amir Atapour-Abarghouei.
 | Task 1 Closed | 0.657 macro-F1 | 5th |
 | Task 1 Open | 0.669 macro-F1 | 2nd |
 
-All four development-phase leaderboards: 1st.
+Development phase: first on both Open leaderboards.
 
 ## Setup
 
