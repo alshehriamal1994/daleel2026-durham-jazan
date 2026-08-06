@@ -17,26 +17,27 @@ BLUE, VERM = "#0072B2", "#D55E00"
 # (name, val_gain, realized_gain, label_x, label_y, ha)
 model = [
     ("DAPT+BT T1",   5.2,  9.6,  5.00,  9.6,  "right"),
-    ("rare-aug T1",  1.2,  3.1,  1.42,  3.30, "left"),
-    ("synth T1",     3.0,  1.8,  3.22,  1.8,  "left"),
-    ("synth T2",     2.6,  0.2,  2.82, -0.10, "left"),
-    ("compaction T2",1.4,  1.4,  1.30,  1.90, "center"),
-    ("blend T2",     0.4,  0.5,  0.40,  1.00, "center"),
-    ("32B T1",       1.1,  1.0,  1.32,  0.95, "left"),
+    ("rare-aug T1",  1.2,  3.1,  1.42,  3.35, "left"),
+    ("synth T1",     3.0,  1.8,  3.24,  1.80, "left"),
+    ("synth T2",     2.6,  0.2,  2.82, -0.20, "left"),
+    ("compaction T2",1.4,  1.4,  1.62,  1.35, "left"),
+    ("blend T2",     0.4,  0.5, -0.20,  2.05, "left"),
+    ("32B T1",       1.1,  1.0,  1.28,  0.55, "left"),
 ]
 decision = [
     ("thresholds T1", 1.0, -1.4,  1.22, -1.45, "left"),
     ("fusion T1-C",   2.9, -1.8,  3.12, -1.85, "left"),
-    ("fusion T1-O",   2.3,  1.9,  2.30,  2.50, "center"),
-    ("recalib. T2",   0.9,  0.0,  0.68,  0.00, "right"),
+    ("fusion T1-O",   2.3,  1.9,  2.52,  2.30, "left"),
+    ("recalib. T2",   0.9,  0.0,  0.90, -0.72, "center"),
     ("rules T1",      5.0, -3.8,  4.78, -3.80, "right"),
 ]
 
-fig, ax = plt.subplots(figsize=(3.03, 2.28))
+fig, ax = plt.subplots(figsize=(3.03, 2.5))
 
 ax.plot([0, 6.3], [0, 6.3], ls=(0, (4, 3)), lw=0.8, color="#999999", zorder=1)
 ax.text(4.35, 4.95, "perfect transfer", rotation=19, fontsize=7, color="#777777",
         ha="center", va="bottom")
+ax.plot([0.40, 0.16], [0.78, 1.72], lw=0.6, color="#999999", zorder=2)
 ax.axhspan(-4.9, 0, color="#D55E00", alpha=0.045, zorder=0)
 ax.axhline(0, lw=0.6, color="#bbbbbb", zorder=1)
 ax.text(-0.28, -4.55, "promised, not delivered", fontsize=6.6, color="#a06030",

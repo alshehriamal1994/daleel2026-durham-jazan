@@ -10,7 +10,7 @@ import json, subprocess, re, os
 W = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # daleel2026/
 OUT = os.path.dirname(os.path.abspath(__file__))
 
-PASTEL = {"AS": "#cfe0f5", "AN": "#d7efd0", "ST": "#ffe3b8", "TE": "#f8d9d9", "CO": "#eed9f2", "OT": "#e6e6e6"}
+PASTEL = {"AS": "#e6eef9", "AN": "#eaf5e5", "ST": "#fdf0da", "TE": "#faeaea", "CO": "#f5ebf7", "OT": "#f0f0f0"}
 DARK   = {"AS": "#2b5e9e", "AN": "#3f7d33", "ST": "#a85e00", "TE": "#a33a3a", "CO": "#7c3f8c", "OT": "#5a5a5a"}
 
 NASKH = "/usr/share/fonts/truetype/noto/NotoNaskhArabic-Regular.ttf"
@@ -21,12 +21,13 @@ CSS = f"""
 @font-face {{ font-family: 'PaperNaskh'; src: url('file://{NASKHB}'); font-weight: bold; }}
 @page {{ size: 95mm 200mm; margin: 2mm; }}
 body {{ width: 86mm; margin: 0; font-family: 'Times New Roman','Nimbus Roman',serif; font-size: 10pt; }}
-.ar {{ direction: rtl; text-align: right; font-family: 'PaperNaskh'; font-size: 10.5pt; line-height: 2.05; }}
+.ar {{ direction: rtl; text-align: right; font-family: 'PaperNaskh'; font-size: 10.5pt; line-height: 2.45; }}
 .chip {{ font-family: 'Times New Roman','Nimbus Roman',serif; font-size: 5.8pt; font-weight: bold;
         color: #ffffff; padding: 0.5px 2.5px 1px 2.5px; border-radius: 2.5px;
-        vertical-align: 2.5px; margin: 0 1.5px; direction: ltr; unicode-bidi: embed;
+        vertical-align: 2px; margin: 0 1.5px; direction: ltr; unicode-bidi: embed;
         letter-spacing: 0.3px; }}
-.sp {{ padding: 1px 2px 0.5px 2px; border-radius: 2px; }}
+.sp {{ padding: 1px 2.5px 0.5px 2.5px; border-radius: 2px; margin: 0 1.5px;
+      -webkit-box-decoration-break: clone; box-decoration-break: clone; }}
 .hd {{ font-variant: small-caps; font-weight: bold; font-size: 9pt; margin: 4pt 0 0.5pt 0;
       border-bottom: 0.5px solid #cccccc; padding-bottom: 1pt; }}
 .hd .sc {{ font-variant: normal; font-weight: normal; font-size: 8pt; color: #666666; }}
