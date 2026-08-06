@@ -1,7 +1,23 @@
 # Durham-Jazan at Daleel 2026
 
-Code and LLM-generated synthetic data for the Durham-Jazan system description paper at the
+Code and synthetic data for the Durham-Jazan system description paper at the
 **Daleel 2026 shared task on Arabic Argumentative Discourse Mining** (ArabicNLP 2026, co-located with EMNLP 2026).
+
+<p align="center"><img src="assets/example.png" width="420" alt="Gold span annotation example"></p>
+
+Our campaign's central finding, in one picture: changes to the model or its data delivered
+what validation promised, while tuning of decision rules on top did not.
+
+<p align="center"><img src="assets/transfer.png" width="480" alt="Promised vs delivered gains per intervention"></p>
+
+## Try the core idea in 30 seconds
+
+The paper's *segment-concatenation generation* recipe lets an LLM produce span-annotated
+training data with exact character offsets and no alignment step:
+
+```bash
+python demo_segment_concat.py
+```
 
 **Paper:** *Durham-Jazan at Daleel 2026: Domain-Routed Ensembles, LLM Augmentation, and the
 Limits of Decision-Layer Tuning for Arabic Argument Mining* — Amal Saad Alshehri, Nelly Bencomo,
