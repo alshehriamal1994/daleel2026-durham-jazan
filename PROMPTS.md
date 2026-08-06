@@ -20,7 +20,7 @@ OT (أخرى): لا يسهم إسهاماً حقيقياً في الخطاب ا�
 {text}
 ```
 
-## 2. Synthetic-data generation template (Tasks 1 and 2, Claude)
+## 2. Synthetic-data generation template (Tasks 1 and 2, proprietary LLM)
 
 Generation was run in batches through LLM agents. Each batch prompt was assembled from the
 components below (the batch wording varied by topic/register assignment; this is the template):
