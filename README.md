@@ -32,8 +32,8 @@ under `data/`. Scripts expect the working-directory layout used in the paper
 
 ## Synthetic data (`data/`)
 
-LLM-generated synthetic training data, used **in training only**; thresholds and all
-held-out evaluation use real data exclusively. Task 2 paragraphs were authored as ordered labeled
+Synthetic training data generated with a proprietary LLM, used **in training only**; thresholds and
+all held-out evaluation use real data exclusively. Task 2 paragraphs were authored as ordered labeled
 segments and joined with single spaces, so character offsets are exact by construction
 (*segment-concatenation generation*; paper §3.3).
 
