@@ -66,7 +66,7 @@ construction (paper, Section 3.3).
 | `synth_all.jsonl` | 1 | 171 multi-label paragraphs (development phase) |
 | `synth_v2/` | 1 and 2 | evaluation-phase additions (Task 1 grows to 291 in total) |
 | `synth2_all.jsonl` | 2 | 88 span-annotated paragraphs (development phase) |
-| `synth2_v2_built.jsonl` | 2 | 158 span-annotated paragraphs with verified offsets |
+| `synth2_v2_built.jsonl` | 2 | 70 further span-annotated paragraphs with verified offsets, giving 158 in total |
 
 ## Reproducing the final systems
 
