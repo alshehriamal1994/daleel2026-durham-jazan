@@ -30,6 +30,8 @@ body {{ width: 86mm; margin: 0; font-family: 'Times New Roman','Nimbus Roman',se
       -webkit-box-decoration-break: clone; box-decoration-break: clone; }}
 .hd {{ font-variant: small-caps; font-weight: bold; font-size: 9pt; margin: 4pt 0 0.5pt 0;
       border-bottom: 0.5px solid #cccccc; padding-bottom: 1pt; }}
+.lg {{ direction: ltr; text-align: center; font-size: 7.2pt; color: #333333;
+      margin-top: 5pt; padding-top: 3pt; border-top: 0.5px solid #dddddd; line-height: 1.9; }}
 .hd .sc {{ font-variant: normal; font-weight: normal; font-size: 8pt; color: #666666; }}
 """
 
@@ -84,8 +86,13 @@ cam = load2(f"{W}/preds/task2_dev_camelbert.jsonl")
 mar = load2(f"{W}/preds/task2_dev_marbert.jsonl")
 synth2 = [json.loads(l) for l in open(f"{W}/data/synth2_all.jsonl", encoding="utf-8")]
 
-# 1. bg_example — worked gold example (editorial 956)
-render("bg_example", f'<div class="ar">{mark(dev[956]["text"], gold[956])}</div>')
+# 1. bg_example — worked gold example (Figure 1 of the paper, carries the label key)
+NAMES = [("AS", "assumption"), ("AN", "anecdote"), ("ST", "statistics"),
+         ("TE", "testimony"), ("CO", "common ground"), ("OT", "other")]
+legend = ('<div class="lg">' + ' &nbsp;&nbsp; '.join(
+    f'<span style="white-space:nowrap">{chip(l)}&nbsp;{n.replace(" ", "&nbsp;")}</span>'
+    for l, n in NAMES) + '</div>')
+render("bg_example", f'<div class="ar">{mark(dev[956]["text"], gold[956])}</div>{legend}')
 
 # 2. synth_example — 4-segment synthetic paragraph (e-commerce)
 s = next(r for r in synth2
