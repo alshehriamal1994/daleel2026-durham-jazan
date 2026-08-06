@@ -1,0 +1,9 @@
+torch>=2.10
+transformers>=5.5
+peft
+bitsandbytes
+accelerate
+scikit-learn
+numpy
+sentencepiece
+matplotlib
