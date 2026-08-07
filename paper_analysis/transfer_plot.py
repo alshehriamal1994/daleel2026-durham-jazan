@@ -51,11 +51,10 @@ for x in (-4, -2, 2, 4, 6, 8, 10):
     ax.axvline(x, lw=0.4, color="#e3e3e3", zorder=0)
 
 for yy, lab, p, d, c in rows:
-    ax.annotate("", xy=(d, yy), xytext=(p, yy), zorder=2,
-                arrowprops=dict(arrowstyle="->,head_width=0.18,head_length=0.32",
-                                color=c, lw=1.1, shrinkA=3.5, shrinkB=1))
-    ax.scatter(p, yy, s=13, facecolor="#b0b0b0", edgecolor="none", zorder=3)
-    ax.scatter(d, yy, s=36, facecolor=c, edgecolor="white", linewidths=0.7, zorder=4)
+    ax.plot([p, d], [yy, yy], color="#c9c9c9", lw=1.1, zorder=2,
+            solid_capstyle="round")
+    ax.scatter(p, yy, s=15, facecolor="#a8a8a8", edgecolor="none", zorder=3)
+    ax.scatter(d, yy, s=40, facecolor=c, edgecolor="white", linewidths=0.7, zorder=4)
 
 ax.set_yticks([r[0] for r in rows])
 ax.set_yticklabels([r[1] for r in rows])
@@ -71,8 +70,6 @@ ax.spines[["top", "right", "left"]].set_visible(False)
 ax.tick_params(axis="x", length=2.5, color="#999999")
 ax.spines["bottom"].set_color("#999999")
 
-ax.text(-4.35, -1.05, "delivered a loss", fontsize=6.4, color="#a06030",
-        style="italic", ha="left", va="bottom")
 
 handles = [
     Line2D([], [], marker="o", ls="", color="#b0b0b0", markersize=4,
