@@ -77,7 +77,8 @@ construction (paper, Section 3.3).
 | Task 1 Closed (0.657) | `dapt.py` and `dapt_v2.py` for domain-adaptive pretraining, `backtranslate.py` and `rare_bt_gen.py` for augmentation, `dapt_rare_submit.py` for the encoder ensemble, and `t1_llm_sft.py` for the Qwen3-32B routing |
 | Task 1 Open (0.669) | the above plus synthetic paragraphs (`open_submit.py`) and span fusion from Task 2 |
 
-Validation utilities include `clean_holdout.py`, `model_search.py`, `dapt_eval.py`,
+The `configs/` directory holds the per-system decoding thresholds and rule
+configurations referenced in the paper's appendix. Validation utilities include `clean_holdout.py`, `model_search.py`, `dapt_eval.py`,
 `rare_aug_eval.py`, and `ens_check.py`. The `paper_analysis/` directory contains the
 scripts behind the paper's transfer figure, the per-class table, the bootstrap analyses,
 and the Arabic example figures. `PROMPTS.md` documents the fine-tuning prompt and the
