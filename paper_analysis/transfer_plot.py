@@ -31,7 +31,7 @@ decision = [
     ("recalibration (T2)",           0.9,  0.0),
 ]
 
-fig, ax = plt.subplots(figsize=(3.03, 2.48))
+fig, ax = plt.subplots(figsize=(3.03, 2.24))
 
 rows = []       # (y, label, promised, delivered, color)
 y = 13.0
@@ -54,9 +54,8 @@ for yy, lab, p, d, c in rows:
     ax.annotate("", xy=(d, yy), xytext=(p, yy), zorder=2,
                 arrowprops=dict(arrowstyle="->,head_width=0.18,head_length=0.32",
                                 color=c, lw=1.1, shrinkA=3.5, shrinkB=1))
-    ax.scatter(p, yy, s=24, facecolor="white", edgecolor="#888888",
-               linewidths=0.9, zorder=3)
-    ax.scatter(d, yy, s=30, facecolor=c, edgecolor="white", linewidths=0.6, zorder=4)
+    ax.scatter(p, yy, s=13, facecolor="#b0b0b0", edgecolor="none", zorder=3)
+    ax.scatter(d, yy, s=36, facecolor=c, edgecolor="white", linewidths=0.7, zorder=4)
 
 ax.set_yticks([r[0] for r in rows])
 ax.set_yticklabels([r[1] for r in rows])
@@ -65,24 +64,25 @@ for yy, txt, c in rows_hdr:
             ha="right", va="center", fontsize=7.6, fontweight="bold", color=c)
 
 ax.set_xlim(-4.6, 10.3)
-ax.set_ylim(-1.6, 13.8)
+ax.set_ylim(-1.15, 13.75)
 ax.set_xticks([-4, -2, 0, 2, 4, 6, 8, 10])
 ax.set_xlabel("F1 points")
 ax.spines[["top", "right", "left"]].set_visible(False)
 ax.tick_params(axis="x", length=2.5, color="#999999")
 ax.spines["bottom"].set_color("#999999")
 
-ax.text(-4.35, -1.5, "delivered a loss", fontsize=6.4, color="#a06030",
+ax.text(-4.35, -1.05, "delivered a loss", fontsize=6.4, color="#a06030",
         style="italic", ha="left", va="bottom")
 
 handles = [
-    Line2D([], [], marker="o", ls="", markerfacecolor="white",
-           markeredgecolor="#888888", markersize=5.5, label="promised"),
+    Line2D([], [], marker="o", ls="", color="#b0b0b0", markersize=4,
+           label="promised"),
     Line2D([], [], marker="o", ls="", color="#444444", markeredgecolor="white",
-           markersize=6, label="delivered"),
+           markersize=6.5, label="delivered"),
 ]
-ax.legend(handles=handles, loc="center right", bbox_to_anchor=(1.0, 0.80),
-          frameon=False, borderaxespad=0.1, handletextpad=0.15, labelspacing=0.25)
+ax.legend(handles=handles, loc="lower center", bbox_to_anchor=(0.5, 1.0),
+          ncol=2, frameon=False, borderaxespad=0.0, handletextpad=0.2,
+          columnspacing=2.0, fontsize=7.2)
 
 fig.tight_layout(pad=0.15)
 os.makedirs("/home/amal/Desktop/daleel2026/paper/figs", exist_ok=True)
