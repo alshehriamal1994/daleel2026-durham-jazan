@@ -28,8 +28,8 @@ components below. The batch wording varied by topic and register assignment, and
 - **Role/task**: write realistic Arabic paragraphs in the style of (news editorial | televised
   debate turn), as training data for argumentative evidence-type classification.
 - **Label scheme**: the six official definitions above, verbatim.
-- **Few-shot grounding**: 3–5 real training examples of the target classes (paragraph + gold labels,
-  or paragraph + labeled spans for Task 2).
+- **Few-shot grounding**: three to five real training examples of the target classes (paragraph + gold labels,
+  or paragraph + labelled spans for Task 2).
 - **Targeting**: instructions to include the starved classes (ST, CO, and editorial OT), with
   realistic invented figures/statistics for ST, and to vary topics widely (economy, health,
   education, environment, technology, sport, law, ...) across both registers.
