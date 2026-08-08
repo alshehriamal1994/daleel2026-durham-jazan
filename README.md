@@ -6,7 +6,7 @@ held with EMNLP 2026). It contains our code, our synthetic training data, and th
 scripts behind every figure and analysis in the paper.
 
 **Paper:** *Durham-Jazan at Daleel 2026: Domain-Routed Ensembles, LLM Augmentation, and the
-Limits of Decision Rule Tuning for Arabic Argument Mining.* Amal Saad Alshehri, Housam Babiker, Nelly Bencomo,
+Limits of Decision Rule Tuning for Arabic Argument Mining.* Amal Saad Alshehri, Nelly Bencomo, Housam Babiker,
 and Amir Atapour-Abarghouei.
 
 <p align="center"><img src="assets/example.png" width="420" alt="A gold span annotation from the development set"></p>
@@ -99,7 +99,7 @@ The official task data belongs to the Daleel 2026 organisers and is not included
 ```bibtex
 @inproceedings{durham-jazan-daleel2026,
   title  = "Durham-Jazan at Daleel 2026: Domain-Routed Ensembles, LLM Augmentation, and the Limits of Decision Rule Tuning for Arabic Argument Mining",
-  author = "Alshehri, Amal Saad and Babiker, Housam and Bencomo, Nelly and Atapour-Abarghouei, Amir",
+  author = "Alshehri, Amal Saad and Bencomo, Nelly and Babiker, Housam and Atapour-Abarghouei, Amir",
   booktitle = "Proceedings of ArabicNLP 2026",
   year   = "2026"
 }
