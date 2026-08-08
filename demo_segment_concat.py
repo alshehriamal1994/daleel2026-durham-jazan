@@ -1,4 +1,4 @@
-"""Segment-concatenation generation in 30 seconds.
+"""A short demonstration of segment-concatenation generation.
 
 The LLM writes each paragraph as an ordered list of labelled segments.
 Joining them with single spaces gives exact character offsets by construction,
@@ -29,4 +29,4 @@ for s in spans:
     print(f"  [{ok}] {s['label']}  [{s['start_offset']:4d},{s['end_offset']:4d})  {piece[:60]}")
 
 assert all(text[s["start_offset"]:s["end_offset"]] for s in spans)
-print("\nEvery offset is exact by construction. No parsing, no alignment.")
+print("\nEvery offset is exact by construction, with no parsing and no alignment step.")
