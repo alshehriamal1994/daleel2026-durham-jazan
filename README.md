@@ -6,7 +6,7 @@ held with EMNLP 2026). It contains our code, our synthetic training data, and th
 scripts behind every figure and analysis in the paper.
 
 **Paper:** *Durham-Jazan at Daleel 2026: Domain-Routed Ensembles, LLM Augmentation, and the
-Limits of Decision Rule Tuning for Arabic Argument Mining.* Amal Saad Alshehri, Nelly Bencomo, Housam Babiker,
+Limits of Decision-Rule Tuning for Arabic Argument Mining.* Amal Saad Alshehri, Nelly Bencomo, Housam Babiker,
 and Amir Atapour-Abarghouei.
 
 <p align="center"><img src="assets/example.png" width="420" alt="A gold span annotation from the development set"></p>
@@ -69,6 +69,10 @@ construction (paper, Section 3.3).
 | `synth_v2/` | 1 and 2 | evaluation-phase additions (Task 1 grows to 291 in total) |
 | `synth2_all.jsonl` | 2 | 88 span-annotated paragraphs (development phase) |
 | `synth2_v2_built.jsonl` | 2 | 70 further span-annotated paragraphs with verified offsets, giving 158 in total |
+
+The four systems at a glance (solid boxes: Closed track; dashed: Open-track additions):
+
+<p align="center"><img src="assets/pipeline.png" width="420" alt="Pipeline diagram of the four systems"></p>
 
 ## Reproducing the final systems
 
