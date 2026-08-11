@@ -78,8 +78,10 @@ def t2_score(pred, ids):
     P = cp/tp if tp else 0; R = cr/tg if tg else 0
     return 2*P*R/(P+R) if P+R else 0.0
 
-p2 = load2(f"{W}/preds/task2_dev.jsonl")
-print(f"\n== T2 verify: task2_dev.jsonl overall {t2_score(p2, ids2):.4f} (leaderboard 0.689) ==")
+# routed dev configuration (cam editorials / mar debates) — the basis of the
+# paired compaction bootstrap reported in the paper (raw 0.6918 -> pp3 0.7186)
+p2 = load2(f"{W}/preds/task2_dev_routed.jsonl")
+print(f"\n== T2 verify: task2_dev_routed.jsonl overall {t2_score(p2, ids2):.4f} ==")
 
 def compact(pred):
     out = {}
