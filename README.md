@@ -56,7 +56,9 @@ can be adjusted as needed.
 ## Synthetic data
 
 The `data/` directory holds the synthetic training data generated with a proprietary
-large language model. It was used in training only, and thresholds and all held-out
+large language model (Claude Opus 4.8). All of it is machine-generated: the statistics
+inside synthetic ST spans are plausible but invented, so the files are unsuitable as
+factual text. It was used in training only, and thresholds and all held-out
 evaluation used real data exclusively. For Task 2 the paragraphs were authored as ordered
 labelled segments and joined with single spaces, so the character offsets are exact by
 construction (paper, Section 3.3).
