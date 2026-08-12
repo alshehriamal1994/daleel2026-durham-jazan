@@ -81,15 +81,17 @@ ax1.spines[["top", "right"]].set_visible(False)
 ax1.tick_params(length=2.5)
 
 bins = np.linspace(-0.06, 0.08, 40)
-ax2.hist(ins, bins=bins, color=BLUE, alpha=0.75, label="on the tuning half", lw=0)
-ax2.hist(out, bins=bins, color=VERM, alpha=0.75, label="on held-out data", lw=0)
+ax2.hist(ins, bins=bins, color=BLUE, alpha=0.8, lw=0)
+ax2.hist(out, bins=bins, color=VERM, alpha=0.8, lw=0)
 ax2.axvline(0, lw=0.8, color="#555555")
 ax2.set_xlabel("change in macro-F1 after recalibration")
 ax2.set_ylabel("splits")
-ax2.set_ylim(0, 96)
-ax2.set_title("Threshold gains do not leave the tuning set", fontsize=8, pad=4)
-ax2.legend(frameon=False, loc="upper center", ncol=2, handlelength=1.1,
-           handletextpad=0.5, columnspacing=1.4, borderaxespad=0.2)
+ax2.set_ylim(0, 100)
+ax2.set_title("Threshold gains do not leave the tuning set", fontsize=8, pad=6)
+ax2.annotate("on held-out\ndata", (-0.021, 74), color=VERM, fontsize=7.5,
+             ha="center", va="bottom", linespacing=1.25)
+ax2.annotate("on the\ntuning half", (0.036, 70), color=BLUE, fontsize=7.5,
+             ha="center", va="bottom", linespacing=1.25)
 ax2.spines[["top", "right"]].set_visible(False)
 ax2.tick_params(length=2.5)
 
