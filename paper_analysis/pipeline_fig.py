@@ -1,5 +1,6 @@
-# System pipeline diagram (paper appendix). Solid = Closed track,
-# dashed blue = Open-track additions.
+# Full-width system diagram (paper, Appendix A).
+# Data and pretraining across the top, then the two task pipelines side by
+# side. Solid = Closed track, dashed blue = Open-track additions.
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -11,65 +12,79 @@ plt.rcParams.update({
     "pdf.fonttype": 42,
 })
 
-INK, GRAY, BLUE, LIGHT = "#1a1a1a", "#8a8a8a", "#0072B2", "#f2f2f2"
-FS = 6.8
+INK, GRAY, BLUE, FILL = "#1a1a1a", "#9a9a9a", "#0072B2", "#f4f4f4"
+FS = 7.2
 
-fig, ax = plt.subplots(figsize=(3.03, 3.5))
-ax.set_xlim(0, 100)
-ax.set_ylim(0, 152)
+fig, ax = plt.subplots(figsize=(6.3, 2.72))
+ax.set_xlim(-7, 207)
+ax.set_ylim(-13, 92)
 ax.axis("off")
 
+
 def box(x, y, w, h, text, dashed=False):
-    ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=1.2",
-                                facecolor=LIGHT,
+    ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=1.4",
+                                facecolor="white" if dashed else FILL,
                                 edgecolor=BLUE if dashed else GRAY,
-                                linestyle="--" if dashed else "-", linewidth=0.8))
+                                linestyle=(0, (3.5, 2.5)) if dashed else "-",
+                                linewidth=0.9, zorder=2))
     ax.text(x + w / 2, y + h / 2, text, ha="center", va="center",
-            fontsize=FS, color=INK, linespacing=1.25)
+            fontsize=FS, color=INK, linespacing=1.3, zorder=3)
 
-def arrow(x1, y1, x2, y2, dashed=False):
-    ax.add_patch(FancyArrowPatch((x1, y1), (x2, y2),
-                                 arrowstyle="-|>", mutation_scale=7,
-                                 linestyle=(0, (4, 3)) if dashed else "-",
-                                 linewidth=0.8, color=BLUE if dashed else GRAY,
-                                 shrinkA=1, shrinkB=1))
 
-def band(y, label):
-    ax.text(1, y, label, fontsize=7.2, fontweight="bold", color=INK,
-            ha="left", va="center")
+def arrow(p1, p2, dashed=False, rad=0.0):
+    ax.add_patch(FancyArrowPatch(p1, p2, arrowstyle="-|>", mutation_scale=7,
+                                 linestyle=(0, (3.5, 2.5)) if dashed else "-",
+                                 linewidth=0.9, color=BLUE if dashed else GRAY,
+                                 shrinkA=0.5, shrinkB=0.5, zorder=1,
+                                 connectionstyle=f"arc3,rad={rad}"))
 
-# ---- data band -------------------------------------------------------------
-band(148, "Data and pretraining")
-box(2, 128, 45, 15, "612 train (+217 dev, eval);\nBT ×1; rare-class BT ×3")
-box(52, 128, 46, 15, "LLM-synthetic 291 T1 /\n158 T2 (Open; training only)", dashed=True)
-box(27, 108, 46, 13, "DAPT-v2 encoders\n(MLM on 1,042 paragraphs)")
-arrow(24, 128, 40, 122)
 
-# ---- task 2 band -----------------------------------------------------------
-band(102, "Task 2 — spans")
-box(2, 82, 45, 14, "CAMeLBERT-mix ×8\n(editorials)")
-box(52, 82, 46, 14, "MARBERTv2 ×8\n(debates)")
-arrow(40, 108, 26, 97)
-arrow(60, 108, 73, 97)
-box(2, 62, 60, 13, "route by provided genre;\nper-domain thresholds")
-box(67, 62, 31, 13, "char-level\nblend (Open)", dashed=True)
-arrow(24, 82, 27, 76)
-arrow(75, 82, 40, 76)
-arrow(67, 68, 63, 68, dashed=True)
-box(2, 44, 96, 11, "span compaction ($G_{ed}$=400, $G_{db}$=5, $L$=25)  →  labelled spans")
-arrow(32, 62, 32, 56)
+def band(y, label, x=0, ha="left"):
+    ax.text(x, y, label, fontsize=7.6, fontweight="bold", color=INK,
+            ha=ha, va="center")
 
-# ---- task 1 band -----------------------------------------------------------
-band(38, "Task 1 — paragraph labels")
-box(2, 18, 45, 14, "Qwen3-32B QLoRA ×3,\nlabel-set union (editorials)")
-box(52, 18, 46, 14, "encoder ensemble, robust\nmedian thresholds (debates)")
-box(2, 2, 60, 11, "route by genre  →  paragraph labels")
-box(67, 2, 31, 11, "span fusion\n(debates, Open)", dashed=True)
-arrow(24, 18, 28, 14)
-arrow(75, 18, 40, 14)
-arrow(67, 7, 63, 7, dashed=True)
-arrow(96, 44, 95, 14, dashed=True)   # compacted spans feed the Open fusion
 
-fig.tight_layout(pad=0.1)
+# ---------------- data band (full width) ----------------
+band(85, "Data and pretraining")
+box(0, 62, 60, 14, "612 train paragraphs\n(+217 dev in the eval phase)")
+box(68, 62, 60, 14, "back-translation $\\times$1\nrare-class BT $\\times$3")
+box(136, 62, 64, 14, "LLM-synthetic\n291 T1 / 158 T2 (Open)", dashed=True)
+box(40, 44, 120, 12, "DAPT-v2 pretraining (MLM on 1,042 paragraphs), then task training")
+arrow((30, 62), (70, 56.5))
+arrow((98, 62), (100, 56.5))
+arrow((168, 62), (130, 56.5), dashed=True)
+
+# ---------------- task 2 (left) ----------------
+band(38, "Task 2 — argumentative spans")
+box(0, 16, 44, 13, "CAMeLBERT-mix $\\times$8\n(editorials)")
+box(50, 16, 44, 13, "MARBERTv2 $\\times$8\n(debates)")
+arrow((70, 44), (24, 29.5))
+arrow((100, 44), (70, 29.5))
+box(0, 0, 60, 12, "route by genre, then\nspan compaction")
+box(66, 2, 28, 9, "char blend\n(Open)", dashed=True)
+arrow((24, 16), (28, 12.5))
+arrow((70, 16), (44, 12.5))
+arrow((66, 6.5), (60.5, 6.5), dashed=True)
+
+# ---------------- task 1 (right) ----------------
+box(106, 16, 44, 13, "Qwen3-32B QLoRA\n$\\times$3 (editorials)")
+box(156, 16, 44, 13, "encoder ensemble\n(debates)")
+arrow((120, 44), (128, 29.5))
+arrow((140, 44), (176, 29.5))
+box(106, 0, 60, 12, "route by genre, then\nrobust thresholds")
+box(172, 2, 28, 9, "span fusion\n(Open)", dashed=True)
+arrow((128, 16), (130, 12.5))
+arrow((176, 16), (150, 12.5))
+arrow((172, 6.5), (166.5, 6.5), dashed=True)
+
+arrow((30, 0), (30, -6))
+arrow((136, 0), (136, -6))
+ax.text(30, -9.5, "labelled spans", fontsize=FS, style="italic",
+        color=INK, ha="center", va="center")
+ax.text(136, -9.5, "paragraph labels", fontsize=FS, style="italic",
+        color=INK, ha="center", va="center")
+band(38, "Task 1 — paragraph labels", x=200, ha="right")
+
+fig.tight_layout(pad=0.15)
 fig.savefig("/home/amal/Desktop/daleel2026/paper/figs/pipeline.pdf")
 print("saved")
