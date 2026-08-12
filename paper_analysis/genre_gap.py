@@ -93,6 +93,16 @@ for lab in LABELS:
 print(f"\nPearson r (editorial train share vs editorial advantage) = "
       f"{np.corrcoef(shares, diffs)[0, 1]:.2f}")
 
+# robustness: does the pattern hold for each encoder family on its own?
+print("\nreplication across encoder families (raw decodes):")
+for name, f in [("CAMeLBERT-mix", "task2_dev_camelbert.jsonl"),
+                ("MARBERTv2", "task2_dev_marbert.jsonl"),
+                ("routed", "task2_dev_routed.jsonl")]:
+    p = load2(f"{W}/preds/{f}")
+    d = [f1(p, ed, lab) - f1(p, db, lab) for lab in LABELS]
+    print(f"  {name:14} r = {np.corrcoef([share[l] for l in LABELS], d)[0, 1]:.2f}"
+          f"   OT diff = {d[LABELS.index('OT')]:+.2f}")
+
 # structural contrast
 for name, ids in [("editorial", ed), ("debate", db)]:
     spans = [s for i in ids for s in gold[i]]
