@@ -13,11 +13,11 @@ plt.rcParams.update({
 })
 
 INK, GRAY, BLUE, FILL = "#1a1a1a", "#9a9a9a", "#0072B2", "#f4f4f4"
-FS = 7.2
+FS = 8.3
 
-fig, ax = plt.subplots(figsize=(6.3, 2.72))
+fig, ax = plt.subplots(figsize=(6.3, 3.05))
 ax.set_xlim(-7, 207)
-ax.set_ylim(-13, 92)
+ax.set_ylim(-14, 92)
 ax.axis("off")
 
 
@@ -40,50 +40,50 @@ def arrow(p1, p2, dashed=False, rad=0.0):
 
 
 def band(y, label, x=0, ha="left"):
-    ax.text(x, y, label, fontsize=7.6, fontweight="bold", color=INK,
+    ax.text(x, y, label, fontsize=8.8, fontweight="bold", color=INK,
             ha=ha, va="center")
 
 
 # ---------------- data band (full width) ----------------
-band(85, "Data and pretraining")
-box(0, 62, 60, 14, "612 train paragraphs\n(+217 dev in the eval phase)")
-box(68, 62, 60, 14, "back-translation $\\times$1\nrare-class BT $\\times$3")
-box(136, 62, 64, 14, "LLM-synthetic\n291 T1 / 158 T2 (Open)", dashed=True)
-box(40, 44, 120, 12, "DAPT-v2 pretraining (MLM on 1,042 paragraphs), then task training")
-arrow((30, 62), (70, 56.5))
-arrow((98, 62), (100, 56.5))
-arrow((168, 62), (130, 56.5), dashed=True)
+band(86, "Data and pretraining")
+box(0, 61, 60, 16, "612 train paragraphs\n(+217 dev in the eval phase)")
+box(68, 61, 60, 16, "back-translation $\\times$1\nrare-class BT $\\times$3")
+box(136, 61, 64, 16, "LLM-synthetic\n291 T1 / 158 T2 (Open)", dashed=True)
+box(36, 42, 128, 13, "DAPT-v2 pretraining (MLM on 1,042 paragraphs), then task training")
+arrow((30, 61), (70, 55.5))
+arrow((98, 61), (100, 55.5))
+arrow((168, 61), (130, 55.5), dashed=True)
 
 # ---------------- task 2 (left) ----------------
-band(38, "Task 2 — argumentative spans")
-box(0, 16, 44, 13, "CAMeLBERT-mix $\\times$8\n(editorials)")
-box(50, 16, 44, 13, "MARBERTv2 $\\times$8\n(debates)")
-arrow((70, 44), (24, 29.5))
-arrow((100, 44), (70, 29.5))
-box(0, 0, 60, 12, "route by genre, then\nspan compaction")
-box(66, 2, 28, 9, "char blend\n(Open)", dashed=True)
-arrow((24, 16), (28, 12.5))
-arrow((70, 16), (44, 12.5))
-arrow((66, 6.5), (60.5, 6.5), dashed=True)
+band(36, "Task 2 — argumentative spans")
+box(0, 14, 44, 15, "CAMeLBERT-mix $\\times$8\n(editorials)")
+box(50, 14, 44, 15, "MARBERTv2 $\\times$8\n(debates)")
+arrow((70, 42), (24, 29.5))
+arrow((100, 42), (70, 29.5))
+box(0, -2, 60, 13, "route by genre, then\nspan compaction")
+box(66, -1, 28, 11, "char blend\n(Open)", dashed=True)
+arrow((24, 14), (28, 11.5))
+arrow((70, 14), (44, 11.5))
+arrow((66, 4.5), (60.5, 4.5), dashed=True)
 
 # ---------------- task 1 (right) ----------------
-box(106, 16, 44, 13, "Qwen3-32B QLoRA\n$\\times$3 (editorials)")
-box(156, 16, 44, 13, "encoder ensemble\n(debates)")
-arrow((120, 44), (128, 29.5))
-arrow((140, 44), (176, 29.5))
-box(106, 0, 60, 12, "route by genre, then\nrobust thresholds")
-box(172, 2, 28, 9, "span fusion\n(Open)", dashed=True)
-arrow((128, 16), (130, 12.5))
-arrow((176, 16), (150, 12.5))
-arrow((172, 6.5), (166.5, 6.5), dashed=True)
+box(106, 14, 44, 15, "Qwen3-32B QLoRA\n$\\times$3 (editorials)")
+box(156, 14, 44, 15, "encoder ensemble\n(debates)")
+arrow((120, 42), (128, 29.5))
+arrow((140, 42), (176, 29.5))
+box(106, -2, 60, 13, "route by genre, then\nrobust thresholds")
+box(172, -1, 28, 11, "span fusion\n(Open)", dashed=True)
+arrow((128, 14), (130, 11.5))
+arrow((176, 14), (150, 11.5))
+arrow((172, 4.5), (166.5, 4.5), dashed=True)
 
-arrow((30, 0), (30, -6))
-arrow((136, 0), (136, -6))
-ax.text(30, -9.5, "labelled spans", fontsize=FS, style="italic",
+arrow((30, -2), (30, -6.5))
+arrow((136, -2), (136, -6.5))
+ax.text(30, -9.5, "labelled spans", fontsize=FS+0.2, style="italic",
         color=INK, ha="center", va="center")
-ax.text(136, -9.5, "paragraph labels", fontsize=FS, style="italic",
+ax.text(136, -9.5, "paragraph labels", fontsize=FS+0.2, style="italic",
         color=INK, ha="center", va="center")
-band(38, "Task 1 — paragraph labels", x=200, ha="right")
+band(36, "Task 1 — paragraph labels", x=200, ha="right")
 
 fig.tight_layout(pad=0.15)
 fig.savefig("/home/amal/Desktop/daleel2026/paper/figs/pipeline.pdf")
