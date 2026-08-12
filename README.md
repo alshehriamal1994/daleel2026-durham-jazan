@@ -74,6 +74,16 @@ The four systems at a glance (solid boxes: Closed track; dashed: Open-track addi
 
 <p align="center"><img src="assets/pipeline.png" width="420" alt="Pipeline diagram of the four systems"></p>
 
+## Post-submission analyses
+
+The `paper_analysis/` scripts reproduce every number in the paper's appendices:
+`analysis.py` (per-class table and bootstraps), `transfer_plot.py` and
+`findings_fig.py` (Figures 2 and 4), `error_taxonomy.py`, `genre_gap.py` and
+`genre_transfer.py` (why editorials are harder), `threshold_transfer.py` and
+`threshold_transfer_t2.py` (the controlled recalibration experiment),
+`ensemble_curve.py` (seed variance), `ranking_analysis.py` (which domain decided
+the task), `synth_agreement.py` (blind re-annotation), and `pipeline_fig.py`.
+
 ## Reproducing the final systems
 
 | System | Key scripts |
