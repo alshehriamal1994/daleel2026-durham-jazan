@@ -15,7 +15,14 @@ The central finding of our participation is summarised in one figure. Changes to
 or its data delivered what validation promised, while tuning of the decision rules on top
 did not.
 
-<p align="center"><img src="assets/transfer.png" width="480" alt="Promised and delivered gains for each intervention"></p>
+<p align="center"><img src="assets/transfer.png" width="500" alt="Promised and delivered gains for each intervention"></p>
+
+Two further findings come from post-submission analysis. Per-label performance on
+editorials tracks how much of that label's training data came from editorials, which
+explains the editorial deficit every team suffered, and threshold recalibration gains
+measured on the tuning half do not survive on held-out data.
+
+<p align="center"><img src="assets/findings.png" width="760" alt="Genre skew and threshold transfer"></p>
 
 ## A short demonstration
 
@@ -72,7 +79,7 @@ construction (paper, Section 3.3).
 
 The four systems at a glance (solid boxes: Closed track; dashed: Open-track additions):
 
-<p align="center"><img src="assets/pipeline.png" width="420" alt="Pipeline diagram of the four systems"></p>
+<p align="center"><img src="assets/pipeline.png" width="760" alt="Pipeline diagram of the four systems"></p>
 
 ## Post-submission analyses
 
