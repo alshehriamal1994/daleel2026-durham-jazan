@@ -1,5 +1,5 @@
 # Blind re-annotation check of the Task 1 synthetic data (paper, Appendix B).
-# A second, newer LLM (Claude Fable 5) re-annotated all 291 synthetic
+# A second, different proprietary LLM re-annotated all 291 synthetic
 # paragraphs given only the official label definitions, blind to the
 # generator's labels. This script scores agreement between those blind
 # annotations (synth_blind_annotations.jsonl; "id" indexes the concatenation
