@@ -17,7 +17,7 @@ for f in ["data/synth_all.jsonl", "data/synth_v2/t1_batch_agent.jsonl"]:
 gold = {i: set(r["labels"]) for i, r in enumerate(rows)}
 
 ann = {}
-for l in open("synth_blind_annotations.jsonl", encoding="utf-8"):
+for l in open("paper_analysis/synth_blind_annotations.jsonl", encoding="utf-8"):
     r = json.loads(l)
     ann[r["id"]] = set(r["labels"])
 
