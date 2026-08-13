@@ -55,10 +55,15 @@ pip install -r requirements.txt
 The official task data and scoring scripts are not redistributed here. They are available
 from the organisers through the task pages at
 https://qatardebate.org/programs/academic-programs/daleel2026-shared-task and CodaBench.
-Place `train_task_1.jsonl`, `train_task_2.jsonl`, `dev_in.jsonl`, and related files under
-`data/`. The scripts expect the working directory layout used in the paper, namely
-`data/`, `models/`, `oof/`, and `preds/`, and the path constants at the top of each script
-can be adjusted as needed.
+Place `train_task_1.jsonl`, `train_task_2.jsonl`, `dev_in.jsonl`, `dev_task_1_ref.jsonl`,
+`dev_task_2_ref.jsonl`, and related files under `data/`.
+
+The scripts in `paper_analysis/` resolve their paths against the repository root, so they
+can be run from any working directory and will look for their inputs in the `data/`,
+`oof/`, and `preds/` layout used in the paper. The training and prediction scripts in
+`src/` still carry an absolute path constant at the top (`W=...`) pointing at the
+directory tree in which they were originally run, and they import the organisers' scorer
+as `task2_scoring`; both need adjusting before those scripts will run elsewhere.
 
 ## Synthetic data
 
@@ -83,13 +88,47 @@ The four systems at a glance (solid boxes: Closed track; dashed: Open-track addi
 
 ## Post-submission analyses
 
-The `paper_analysis/` scripts reproduce every number in the paper's appendices:
-`analysis.py` (per-class table and bootstraps), `transfer_plot.py` and
-`findings_fig.py` (Figures 2 and 4), `error_taxonomy.py`, `genre_gap.py` and
-`genre_transfer.py` (why editorials are harder), `threshold_transfer.py` and
-`threshold_transfer_t2.py` (the controlled recalibration experiment),
-`ensemble_curve.py` (seed variance), `ranking_analysis.py` (which domain decided
-the task), `synth_agreement.py` (blind re-annotation), and `pipeline_fig.py`.
+The `paper_analysis/` scripts are the code behind the paper's figures and appendix
+tables. Run them from anywhere, for example:
+
+```bash
+python paper_analysis/threshold_transfer.py
+```
+
+Five of them need nothing beyond this repository:
+
+| Script | Reproduces |
+|---|---|
+| `synth_agreement.py` | the blind re-annotation of the synthetic data: 79.0% exact agreement, micro-F1 0.94, per-label kappa 0.61 (TE) to 1.00 (ST) (Appendix B) |
+| `ranking_analysis.py` | which domain decided the shared task, from the organisers' published ranking sheet (Appendix E) |
+| `transfer_plot.py` | Figure 4, promised against delivered for all seventeen audited interventions |
+| `pipeline_fig.py` | Figure 2, the pipeline diagram |
+| `demo_segment_concat.py` | the segment-concatenation demonstration above |
+
+Two more need only the organisers' Task 1 files in `data/`, because the out-of-fold
+predictions they run on (`oof/t1_recal_oof_closed.npy`) are included here:
+
+| Script | Reproduces |
+|---|---|
+| `threshold_transfer.py` | Table 4, the controlled recalibration experiment |
+| `findings_fig.py` | Figure 5, both post-submission findings |
+
+The remainder need inputs we cannot redistribute, or a GPU:
+
+| Script | Reproduces | Also needs |
+|---|---|---|
+| `analysis.py` | Table 2, per-class dev F1, and the bootstrap intervals | our dev predictions under `preds/` |
+| `error_taxonomy.py` | Tables 5 and 6, the span and label error taxonomies | `preds/task2_dev_routed.jsonl` |
+| `genre_gap.py` | the editorial-share analysis behind Figure 5 (left) | `preds/` dev decodes for both encoder families |
+| `make_figures.py` | Figures 1, 3, 6, 7, and 9, the Arabic examples | `preds/`, plus headless Chrome and Ghostscript |
+| `mine_interesting.py` | the exploratory scan that located those examples | `preds/` |
+| `threshold_transfer_t2.py` | the Task 2 replication of Table 4 | `oof/t2_recal_oof.pkl` and `oof/t2_gold_all.jsonl`, the latter being organisers' gold |
+| `ensemble_curve.py` | the seed-variance figures of Appendix A | a GPU; it trains eight seeds |
+| `genre_transfer.py` | Table 8, the size-matched genre experiment | a GPU; it trains nine models |
+
+The dev predictions under `preds/` are our own model outputs rather than task data, but
+they are keyed to the organisers' paragraph ids and are not included here. Figure output
+goes to `figs/`.
 
 ## Reproducing the final systems
 
@@ -100,12 +139,16 @@ the task), `synth_agreement.py` (blind re-annotation), and `pipeline_fig.py`.
 | Task 1 Closed (0.657) | `dapt.py` and `dapt_v2.py` for domain-adaptive pretraining, `backtranslate.py` and `rare_bt_gen.py` for augmentation, `dapt_rare_submit.py` for the encoder ensemble, and `t1_llm_sft.py` for the Qwen3-32B routing |
 | Task 1 Open (0.669) | the above plus synthetic paragraphs (`open_submit.py`) and span fusion from Task 2 |
 
-The `configs/` directory holds the per-system decoding thresholds and rule
-configurations referenced in the paper's appendix. Validation utilities include `clean_holdout.py`, `model_search.py`, `dapt_eval.py`,
-`rare_aug_eval.py`, and `ens_check.py`. The `paper_analysis/` directory contains the
-scripts behind the paper's transfer figure, the per-class table, the bootstrap analyses,
-and the Arabic example figures. `PROMPTS.md` documents the fine-tuning prompt and the
-synthetic-data generation templates.
+The `configs/` directory holds the evaluation-phase decoding thresholds and rule
+configurations referenced in the paper's Appendix A: the recalibrated Task 1 sets
+(`t1_recal_ths_closed.json`, `t1_recal_ths_open.json`), the routed Task 2 sets
+(`task2_camel_ens.json` for editorials, `task2_marbert_deb.json` for debates), the Open
+blend (`t2_blend_cfg.json`), and the fusion and per-label rules. The development-phase
+Task 1 thresholds quoted in the appendix are the `BASE` constant of
+`paper_analysis/threshold_transfer.py` (Closed) and the `THS` constant of
+`src/test_task1_open.py` (Open). Validation utilities include `clean_holdout.py`,
+`model_search.py`, `dapt_eval.py`, `rare_aug_eval.py`, and `ens_check.py`. `PROMPTS.md`
+documents the fine-tuning prompt and the synthetic-data generation templates.
 
 ## Hardware
 
