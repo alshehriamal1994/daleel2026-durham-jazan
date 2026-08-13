@@ -40,7 +40,7 @@ def tune(idx):
 
 
 print(f"{'tune n':>8}{'in-sample':>12}{'held-out':>11}{'held-out<=0':>13}")
-for frac in (0.25, 0.5):
+for frac in (0.25, 0.5, 0.75, 0.9):
     promised, delivered = [], []
     for _ in range(REPEATS):
         perm = RNG.permutation(len(P))
