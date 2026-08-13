@@ -1,6 +1,7 @@
+import os
 import json, torch
 from transformers import MarianMTModel, MarianTokenizer
-W="/home/amal/Desktop/daleel2026"; dev=torch.device("cuda")
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); dev=torch.device("cuda")
 rows=[json.loads(l) for l in open(f"{W}/data/dev_task_1_ref.jsonl",encoding="utf-8")]
 def load(name):
     tk=MarianTokenizer.from_pretrained(name); m=MarianMTModel.from_pretrained(name).to(dev).half().eval(); return tk,m

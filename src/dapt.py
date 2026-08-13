@@ -1,8 +1,9 @@
+import os
 import json, torch
 from transformers import (AutoTokenizer, AutoModelForMaskedLM, TrainingArguments, Trainer,
                           DataCollatorForLanguageModeling)
 from datasets import Dataset
-W="/home/amal/Desktop/daleel2026"; MODEL="CAMeL-Lab/bert-base-arabic-camelbert-mix"
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); MODEL="CAMeL-Lab/bert-base-arabic-camelbert-mix"
 OUT=f"{W}/models/camelbert-dapt"
 # all available task text (labels NOT used) — train + dev. (test text can be added at test time)
 texts=[]

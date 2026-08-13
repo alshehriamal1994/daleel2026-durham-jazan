@@ -1,9 +1,10 @@
+import os
 import json, numpy as np, torch
 from transformers import (AutoTokenizer, AutoModelForSequenceClassification,
                           TrainingArguments, Trainer, DataCollatorWithPadding)
 from datasets import Dataset
 LABELS=["AS","AN","ST","TE","CO","OT"]; L2I={l:i for i,l in enumerate(LABELS)}
-W="/home/amal/Desktop/daleel2026"; MAXLEN=384; EPOCHS=8; LR=2e-5; BS=16
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); MAXLEN=384; EPOCHS=8; LR=2e-5; BS=16
 MODELS={"arabertv2":"aubmindlab/bert-base-arabertv2",
         "camelbert":"CAMeL-Lab/bert-base-arabic-camelbert-mix"}
 best=json.load(open(f"{W}/oof/task1_best.json")); combo=best["combo"]; ths=np.array(best["ths"])

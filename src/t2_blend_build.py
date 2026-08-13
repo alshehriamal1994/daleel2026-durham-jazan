@@ -1,7 +1,8 @@
+import os
 import json, pickle, subprocess, tempfile, os, re, numpy as np
 LABELS=["AS","AN","ST","TE","CO","OT"]
-W="/home/amal/Desktop/daleel2026"
-SCORER="/home/amal/Desktop/Daleel/Daleel2026/evaluation/task2_scoring.py"
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+SCORER=os.environ.get("DALEEL_SCORER", "")
 GE,GD,ML=400,5,25; W_ED,W_DB=0.5,0.35
 rows=[json.loads(l) for l in open(f"{W}/data/train_task_2.jsonl",encoding="utf-8")]+\
      [json.loads(l) for l in open(f"{W}/data/dev_task_2_ref.jsonl",encoding="utf-8")]

@@ -1,3 +1,4 @@
+import os
 import json, numpy as np, torch
 from collections import Counter
 from sklearn.model_selection import StratifiedKFold
@@ -6,7 +7,7 @@ from transformers import (AutoTokenizer, AutoModelForSequenceClassification,
                           TrainingArguments, Trainer, DataCollatorWithPadding, set_seed)
 from datasets import Dataset
 L=["AS","AN","ST","TE","CO","OT"]; L2I={l:i for i,l in enumerate(L)}
-W="/home/amal/Desktop/daleel2026"; MAXLEN=384; DAPT=f"{W}/models/camelbert-dapt"
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); MAXLEN=384; DAPT=f"{W}/models/camelbert-dapt"
 EPOCHS=8; LR=2e-5; BS=16; FOLDS=5; SEEDS=[42,1,2]
 rows=[json.loads(l) for l in open(f"{W}/data/train_task_1.jsonl",encoding="utf-8")]
 bt=[json.loads(l) for l in open(f"{W}/data/train_task_1_bt.jsonl",encoding="utf-8")]

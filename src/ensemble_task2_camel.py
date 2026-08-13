@@ -1,7 +1,8 @@
+import os
 import json, numpy as np, sys
 from collections import defaultdict
-sys.path.insert(0,"/home/amal/Desktop/daleel2026/src"); import task2_scoring as T2
-LABELS=["AS","AN","ST","TE","CO","OT"]; W="/home/amal/Desktop/daleel2026"
+sys.path.insert(0,os.path.dirname(os.path.abspath(__file__))); import task2_scoring as T2
+LABELS=["AS","AN","ST","TE","CO","OT"]; W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 rows=[json.loads(l) for l in open(f"{W}/data/train_task_2.jsonl",encoding="utf-8")]
 types={r["paragraph_id"]:r["type"] for r in rows}
 gold=defaultdict(list)

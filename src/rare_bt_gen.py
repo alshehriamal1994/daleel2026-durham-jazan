@@ -1,6 +1,7 @@
+import os
 import json, torch
 from transformers import MarianMTModel, MarianTokenizer
-W="/home/amal/Desktop/daleel2026"; dev=torch.device("cuda")
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); dev=torch.device("cuda")
 rows=[json.loads(l) for l in open(f"{W}/data/train_task_1.jsonl",encoding="utf-8")]
 rare_idx=[i for i,r in enumerate(rows) if ("ST" in r["labels"]) or ("CO" in r["labels"])]
 print("rare examples:",len(rare_idx))

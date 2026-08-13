@@ -1,10 +1,11 @@
+import os
 import json, numpy as np, torch
 from sklearn.metrics import f1_score
 from transformers import (AutoTokenizer, AutoModelForSequenceClassification,
                           TrainingArguments, Trainer, DataCollatorWithPadding, set_seed)
 from datasets import Dataset
 L=["AS","AN","ST","TE","CO","OT"]; L2I={l:i for i,l in enumerate(L)}
-W="/home/amal/Desktop/daleel2026"; MAXLEN=384; DAPT=f"{W}/models/camelbert-dapt"
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); MAXLEN=384; DAPT=f"{W}/models/camelbert-dapt"
 rows=[json.loads(l) for l in open(f"{W}/data/train_task_1.jsonl",encoding="utf-8")]
 BTS=[[json.loads(l) for l in open(f"{W}/data/train_task_1_{t}.jsonl",encoding="utf-8")] for t in ["bt","bt2","bt3"]]
 def yv(r):

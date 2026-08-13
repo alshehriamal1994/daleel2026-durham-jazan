@@ -1,9 +1,10 @@
+import os
 import json, numpy as np, torch
 from transformers import (AutoTokenizer, AutoModelForSequenceClassification,
                           TrainingArguments, Trainer, DataCollatorWithPadding, set_seed)
 from datasets import Dataset
 L=["AS","AN","ST","TE","CO","OT"]; L2I={l:i for i,l in enumerate(L)}
-W="/home/amal/Desktop/daleel2026"; MAXLEN=384; EPOCHS=8; LR=2e-5; BS=16; FULL_SEEDS=[42,1,2,3,4,5,6,7]
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); MAXLEN=384; EPOCHS=8; LR=2e-5; BS=16; FULL_SEEDS=[42,1,2,3,4,5,6,7]
 MAR=f"{W}/models/marbert-dapt-v2"
 rows=[json.loads(l) for l in open(f"{W}/data/train_task_1.jsonl",encoding="utf-8")]+\
      [json.loads(l) for l in open(f"{W}/data/dev_task_1_ref.jsonl",encoding="utf-8")]

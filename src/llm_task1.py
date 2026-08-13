@@ -1,3 +1,4 @@
+import os
 import json, numpy as np, torch
 from sklearn.metrics import f1_score
 from transformers import (AutoTokenizer, AutoModelForSequenceClassification,
@@ -5,7 +6,7 @@ from transformers import (AutoTokenizer, AutoModelForSequenceClassification,
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 from datasets import Dataset
 L=["AS","AN","ST","TE","CO","OT"]; L2I={l:i for i,l in enumerate(L)}
-W="/home/amal/Desktop/daleel2026"; MAXLEN=384; MODEL="FreedomIntelligence/AceGPT-v2-8B"
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); MAXLEN=384; MODEL="FreedomIntelligence/AceGPT-v2-8B"
 rows=[json.loads(l) for l in open(f"{W}/data/train_task_1.jsonl",encoding="utf-8")]
 Y=np.zeros((len(rows),6),dtype=np.float32)
 for i,r in enumerate(rows):

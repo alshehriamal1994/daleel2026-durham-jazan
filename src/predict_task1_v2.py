@@ -1,10 +1,11 @@
+import os
 import json, sys, numpy as np, torch
 from sklearn.metrics import f1_score
 from transformers import (AutoTokenizer, AutoModelForSequenceClassification,
                           TrainingArguments, Trainer, DataCollatorWithPadding, set_seed)
 from datasets import Dataset
 LABELS=["AS","AN","ST","TE","CO","OT"]; L2I={l:i for i,l in enumerate(LABELS)}
-W="/home/amal/Desktop/daleel2026"; MAXLEN=384; EPOCHS=8; LR=2e-5; BS=16
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); MAXLEN=384; EPOCHS=8; LR=2e-5; BS=16
 MNAME={"camelbert":"CAMeL-Lab/bert-base-arabic-camelbert-mix","arabertv2":"aubmindlab/bert-base-arabertv2",
        "camdapt":f"{W}/models/camelbert-dapt"}
 # config: name -> list of (tag, seed, posw) and the OOF files to derive thresholds
