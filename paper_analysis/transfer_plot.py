@@ -86,6 +86,7 @@ ax.legend(handles=handles, loc="lower right", frameon=False,
           borderaxespad=0.1, handletextpad=0.15, labelspacing=0.25)
 
 fig.tight_layout(pad=0.15)
-os.makedirs("/home/amal/Desktop/daleel2026/paper/figs", exist_ok=True)
-fig.savefig("/home/amal/Desktop/daleel2026/paper/figs/transfer.pdf")
+FIGS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "figs")
+os.makedirs(FIGS, exist_ok=True)
+fig.savefig(os.path.join(FIGS, "transfer.pdf"))
 print("saved")

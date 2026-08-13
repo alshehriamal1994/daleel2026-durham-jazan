@@ -3,6 +3,7 @@
 # and on a half-and-half mixture, then evaluates each on the editorial and
 # debate halves of the development set. Thresholds are fixed at 0.5 so that
 # no tuning enters the comparison. Post-submission analysis.
+import os
 import json
 import numpy as np
 import torch
@@ -10,7 +11,7 @@ from torch.utils.data import DataLoader
 from transformers import (AutoTokenizer, AutoModelForSequenceClassification,
                           get_linear_schedule_with_warmup)
 
-W = "/home/amal/Desktop/daleel2026"
+W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repository root
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
 L2I = {l: i for i, l in enumerate(LABELS)}
 MODEL = "CAMeL-Lab/bert-base-arabic-camelbert-mix"

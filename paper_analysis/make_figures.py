@@ -3,11 +3,11 @@
 Style system: pastel span fill + 2px class-colored underline + small dark chip
 badge carrying the label code (identity survives grayscale via the chip text).
 Arabic set in Noto Naskh (pinned via @font-face); Latin in Times to match the paper.
-Requires: google-chrome (headless), ghostscript, the task data under ../../data.
+Requires: google-chrome (headless), ghostscript, the task data under data/.
 """
 import json, subprocess, re, os
 
-W = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # daleel2026/
+W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repository root
 OUT = os.path.dirname(os.path.abspath(__file__))
 
 PASTEL = {"AS": "#e6eef9", "AN": "#eaf5e5", "ST": "#fdf0da", "TE": "#faeaea", "CO": "#f5ebf7", "OT": "#f0f0f0"}

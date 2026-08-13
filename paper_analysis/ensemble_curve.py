@@ -3,6 +3,7 @@
 # single seeds and for ensembles of 3, 5 and 8 seeds, averaged over random
 # subsets of the trained seeds. Thresholds fixed at 0.5 so no tuning enters.
 # Post-submission analysis.
+import os
 import json
 import itertools
 import numpy as np
@@ -10,7 +11,7 @@ import torch
 from transformers import (AutoTokenizer, AutoModelForSequenceClassification,
                           get_linear_schedule_with_warmup)
 
-W = "/home/amal/Desktop/daleel2026"
+W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repository root
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
 L2I = {l: i for i, l in enumerate(LABELS)}
 MODEL = "CAMeL-Lab/bert-base-arabic-camelbert-mix"

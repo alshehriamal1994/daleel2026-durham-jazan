@@ -2,11 +2,12 @@
 # Pairs each label's dev F1 in each genre with the editorial share of that
 # label's training spans, using the routed Closed dev configuration after
 # compaction. Post-submission analysis, CPU only.
+import os
 import json
 from collections import defaultdict, Counter
 import numpy as np
 
-W = "/home/amal/Desktop/daleel2026"
+W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repository root
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
 
 

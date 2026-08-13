@@ -3,10 +3,11 @@
 # (clean/partial/label-confusion/hallucinated) for the routed Closed dev
 # configuration, raw vs pp3-compacted. Task 1: per-label FN/FP and the labels
 # predicted instead on missed paragraphs, for the final Closed dev system.
+import os
 import json
 from collections import defaultdict
 
-W = "/home/amal/Desktop/daleel2026"
+W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repository root
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
 
 

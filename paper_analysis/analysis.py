@@ -1,7 +1,8 @@
+import os
 import json, numpy as np
 from collections import defaultdict
 
-W = "/home/amal/Desktop/daleel2026"
+W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repository root
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
 rng = np.random.RandomState(42)
 

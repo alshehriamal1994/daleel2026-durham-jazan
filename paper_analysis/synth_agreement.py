@@ -5,19 +5,22 @@
 # annotations (synth_blind_annotations.jsonl; "id" indexes the concatenation
 # of data/synth_all.jsonl followed by data/synth_v2/t1_batch_agent.jsonl)
 # and the generator's labels.
+import os
 import json
 import numpy as np
+
+W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repository root
 
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
 
 rows = []
 for f in ["data/synth_all.jsonl", "data/synth_v2/t1_batch_agent.jsonl"]:
-    for l in open(f, encoding="utf-8"):
+    for l in open(f"{W}/{f}", encoding="utf-8"):
         rows.append(json.loads(l))
 gold = {i: set(r["labels"]) for i, r in enumerate(rows)}
 
 ann = {}
-for l in open("paper_analysis/synth_blind_annotations.jsonl", encoding="utf-8"):
+for l in open(f"{W}/paper_analysis/synth_blind_annotations.jsonl", encoding="utf-8"):
     r = json.loads(l)
     ann[r["id"]] = set(r["labels"])
 

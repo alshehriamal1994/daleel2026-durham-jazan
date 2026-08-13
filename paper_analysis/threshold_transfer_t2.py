@@ -8,12 +8,13 @@
 # credit. Scoring any subset at any threshold vector is then a sum over that
 # table, which makes hundreds of splits cheap and exact.
 # Post-submission analysis, CPU only.
+import os
 import json
 import pickle
 from collections import defaultdict
 import numpy as np
 
-W = "/home/amal/Desktop/daleel2026"
+W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repository root
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
 GRID = np.round(np.arange(0.20, 0.951, 0.05), 3)
 REPEATS = 200
@@ -24,7 +25,7 @@ oof = pickle.load(open(f"{W}/oof/t2_recal_oof.pkl", "rb"))
 rows = [json.loads(l) for l in open(f"{W}/oof/t2_gold_all.jsonl", encoding="utf-8")]
 GOLD = [[(s["label"], s["start_offset"], s["end_offset"]) for s in r["labels"]] for r in rows]
 GENRE = np.array([r["type"] for r in rows])
-CFG = json.load(open(f"{W}/oof/t2_recal_ths.json"))
+CFG = json.load(open(f"{W}/configs/t2_recal_ths.json"))
 N = len(rows)
 
 
