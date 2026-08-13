@@ -18,16 +18,16 @@ BLUE, GRAY, INK = "#0072B2", "#8a8a8a", "#1a1a1a"
 # (label, promised, realised) — sorted by promise (desc) within each group
 model = [
     ("DAPT + BT (T1)",   5.2,  9.6),
+    ("32B standalone (T1)", 2.9, -1.4),
     ("LLM-synth (T1)",   2.7,  1.8),
     ("LLM-synth (T2)",   2.6,  0.2),
+    ("MARBERT backbone (T2)", 2.0, -0.2),
     ("compaction (T2)",  1.4,  1.4),
     ("rare-aug 3$\\times$ (T1)", 1.2,  3.1),
     ("LLM routing (T1)", 1.1,  1.0),
     ("AraBERT (T1)",     1.1, -0.6),
-    ("32B standalone (T1)", 2.9, -1.4),
-    ("CAM+MAR blend (T1)", 0.4,  0.1),
-    ("MARBERT backbone (T2)", 2.0, -0.2),
     ("char blend (T2)",  0.4,  0.5),
+    ("CAM+MAR blend (T1)", 0.4,  0.1),
 ]
 decision = [
     ("rules (T1)",       5.0, -3.8),
