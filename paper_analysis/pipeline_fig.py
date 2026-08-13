@@ -1,6 +1,7 @@
 # Full-width system diagram (paper, Appendix A).
 # Data and pretraining across the top, then the two task pipelines side by
 # side. Solid = Closed track, dashed blue = Open-track additions.
+import os
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -86,5 +87,7 @@ ax.text(136, -9.5, "paragraph labels", fontsize=FS+0.2, style="italic",
 band(36, "Task 1 — paragraph labels", x=200, ha="right")
 
 fig.tight_layout(pad=0.15)
-fig.savefig("/home/amal/Desktop/daleel2026/paper/figs/pipeline.pdf")
+FIGS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "figs")
+os.makedirs(FIGS, exist_ok=True)
+fig.savefig(os.path.join(FIGS, "pipeline.pdf"))
 print("saved")

@@ -1,12 +1,13 @@
-# Controlled test of the paper's central claim (Appendix D).
+# Controlled test of the paper's central claim (Appendix C).
 # Per-class thresholds are tuned on one half of the out-of-fold predictions
 # and evaluated on the held-out half. The in-sample gain is what threshold
 # tuning appears to deliver; the held-out gain is what actually transfers.
 # Post-submission analysis, CPU only.
+import os
 import json
 import numpy as np
 
-W = "/home/amal/Desktop/daleel2026"
+W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repository root
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
 BASE = [.425, .25, .2, .3, .125, .275]   # development-phase thresholds
 GRID = np.arange(0.05, 0.96, 0.025)

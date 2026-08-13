@@ -2,6 +2,7 @@
 # Left: per-label editorial advantage against the editorial share of that
 # label's training spans. Right: threshold recalibration measured in sample
 # and on held-out data over 500 random splits.
+import os
 import json
 import numpy as np
 import matplotlib
@@ -17,7 +18,7 @@ plt.rcParams.update({
     "pdf.fonttype": 42,
 })
 BLUE, VERM, GRAY = "#0072B2", "#D55E00", "#8a8a8a"
-W = "/home/amal/Desktop/daleel2026"
+W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repository root
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
 
 # ---------------- left panel data (from genre_gap.py) ----------------
@@ -96,6 +97,7 @@ ax2.spines[["top", "right"]].set_visible(False)
 ax2.tick_params(length=2.5)
 
 fig.tight_layout(pad=0.3, w_pad=1.6)
-fig.savefig(f"{W}/paper/figs/findings.pdf")
+os.makedirs(f"{W}/figs", exist_ok=True)
+fig.savefig(f"{W}/figs/findings.pdf")
 print(f"saved. in-sample {ins.mean():+.4f}, held-out {out.mean():+.4f}, "
       f"held-out<=0 {100*np.mean(out<=0):.0f}%")
