@@ -24,6 +24,9 @@ model = [
     ("rare-aug 3$\\times$ (T1)", 1.2,  3.1),
     ("LLM routing (T1)", 1.1,  1.0),
     ("AraBERT (T1)",     1.1, -0.6),
+    ("32B standalone (T1)", 2.9, -1.4),
+    ("CAM+MAR blend (T1)", 0.4,  0.1),
+    ("MARBERT backbone (T2)", 2.0, -0.2),
     ("char blend (T2)",  0.4,  0.5),
 ]
 decision = [
