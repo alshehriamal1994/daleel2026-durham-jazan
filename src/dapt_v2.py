@@ -1,8 +1,9 @@
+import os
 import json, torch
 from transformers import (AutoTokenizer, AutoModelForMaskedLM, TrainingArguments, Trainer,
                           DataCollatorForLanguageModeling)
 from datasets import Dataset
-W="/home/amal/Desktop/daleel2026"
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # v2 corpus: ALL task text incl. the released test paragraphs (labels never used) — per dapt.py's original plan
 texts=[]
 for f in ["data/train_task_1.jsonl","data/dev_in.jsonl","data/test_in.jsonl"]:

@@ -1,3 +1,4 @@
+import os
 import json, sys, numpy as np, torch
 from collections import Counter
 from sklearn.model_selection import StratifiedKFold
@@ -9,7 +10,7 @@ from datasets import Dataset
 LABELS=["AS","AN","ST","TE","CO","OT"]; L2I={l:i for i,l in enumerate(LABELS)}
 MODEL=sys.argv[1]; TAG=sys.argv[2]; SEED=int(sys.argv[3]); POSW=int(sys.argv[4]) if len(sys.argv)>4 else 0
 MAXLEN=384; EPOCHS=8; FOLDS=5; LR=2e-5; BS=16
-W="/home/amal/Desktop/daleel2026"; set_seed(SEED)
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); set_seed(SEED)
 rows=[json.loads(l) for l in open(f"{W}/data/train_task_1.jsonl",encoding="utf-8")]
 texts=[r["text"] for r in rows]; types=[r["type"] for r in rows]
 Y=np.zeros((len(rows),6),dtype=np.float32)

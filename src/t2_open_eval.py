@@ -1,10 +1,11 @@
+import os
 import json, numpy as np, torch, torch.nn as nn, sys
 from transformers import AutoTokenizer, AutoModel, get_linear_schedule_with_warmup, set_seed
 from torch.utils.data import DataLoader
 from collections import defaultdict
-sys.path.insert(0,"/home/amal/Desktop/daleel2026/src"); import task2_scoring as T2
+sys.path.insert(0,os.path.dirname(os.path.abspath(__file__))); import task2_scoring as T2
 L=["AS","AN","ST","TE","CO","OT"]; L2I={l:i for i,l in enumerate(L)}
-W="/home/amal/Desktop/daleel2026"; MAXLEN=384; EPOCHS=10; LR=3e-5; BS=8; MODEL="UBC-NLP/MARBERTv2"
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); MAXLEN=384; EPOCHS=10; LR=3e-5; BS=8; MODEL="UBC-NLP/MARBERTv2"
 dev=torch.device("cuda")
 real=[json.loads(l) for l in open(f"{W}/data/train_task_2.jsonl",encoding="utf-8")]
 synth=[json.loads(l) for l in open(f"{W}/data/synth2_all.jsonl",encoding="utf-8")]

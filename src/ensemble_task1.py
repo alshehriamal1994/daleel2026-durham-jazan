@@ -1,6 +1,7 @@
+import os
 import numpy as np, itertools, json
 from sklearn.metrics import f1_score, precision_recall_fscore_support
-LABELS=["AS","AN","ST","TE","CO","OT"]; W="/home/amal/Desktop/daleel2026"
+LABELS=["AS","AN","ST","TE","CO","OT"]; W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 tags=["arabertv2","marbertv2","camelbert"]
 D={t:np.load(f"{W}/oof/task1_{t}.npz",allow_pickle=True) for t in tags}
 Y=D["arabertv2"]["Y"]; types=D["arabertv2"]["types"]

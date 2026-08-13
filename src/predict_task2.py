@@ -1,9 +1,10 @@
+import os
 import json, numpy as np, torch, torch.nn as nn
 from transformers import AutoTokenizer, AutoModel, get_linear_schedule_with_warmup
 from torch.utils.data import DataLoader
 LABELS=["AS","AN","ST","TE","CO","OT"]; L2I={l:i for i,l in enumerate(LABELS)}
 MODEL="CAMeL-Lab/bert-base-arabic-camelbert-mix"; TAG="camelbert"
-W="/home/amal/Desktop/daleel2026"; MAXLEN=384; EPOCHS=10; LR=3e-5; BS=8
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); MAXLEN=384; EPOCHS=10; LR=3e-5; BS=8
 dev=torch.device("cuda"); tok=AutoTokenizer.from_pretrained(MODEL)
 ths=np.load(f"{W}/oof/task2_{TAG}_pw_ths.npy")
 rows=[json.loads(l) for l in open(f"{W}/data/train_task_2.jsonl",encoding="utf-8")]

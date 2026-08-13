@@ -1,8 +1,9 @@
+import os
 import json, numpy as np, torch, torch.nn as nn
 from transformers import AutoTokenizer, AutoModel, get_linear_schedule_with_warmup, set_seed
 from torch.utils.data import DataLoader
 LABELS=["AS","AN","ST","TE","CO","OT"]; L2I={l:i for i,l in enumerate(LABELS)}
-W="/home/amal/Desktop/daleel2026"; MAXLEN=384; EPOCHS=10; LR=3e-5; BS=8
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); MAXLEN=384; EPOCHS=10; LR=3e-5; BS=8
 dev=torch.device("cuda")
 MNAME={"camelbert":"CAMeL-Lab/bert-base-arabic-camelbert-mix","arabertv2":"aubmindlab/bert-base-arabertv2"}
 cfg=json.load(open(f"{W}/oof/task2_best.json")); members=cfg["members"]; ths=np.array(cfg["ths"])

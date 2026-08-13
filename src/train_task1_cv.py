@@ -1,3 +1,4 @@
+import os
 import json, sys, os, numpy as np, torch
 from collections import Counter
 from sklearn.model_selection import StratifiedKFold
@@ -11,7 +12,7 @@ L2I = {l:i for i,l in enumerate(LABELS)}
 MODEL = sys.argv[1] if len(sys.argv)>1 else "aubmindlab/bert-base-arabertv2"
 TAG   = sys.argv[2] if len(sys.argv)>2 else "arabertv2"
 MAXLEN=384; EPOCHS=8; FOLDS=5; LR=2e-5; BS=16
-W="/home/amal/Desktop/daleel2026"
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 rows=[json.loads(l) for l in open(f"{W}/data/train_task_1.jsonl",encoding="utf-8")]
 texts=[r["text"] for r in rows]

@@ -1,10 +1,11 @@
+import os
 import json, sys, re, numpy as np, torch
 from sklearn.metrics import f1_score
 from transformers import (AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig,
                           TrainingArguments, Trainer, set_seed)
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 MODEL=sys.argv[1]; MODE=sys.argv[2] if len(sys.argv)>2 else "holdout"   # holdout | full
-W="/home/amal/Desktop/daleel2026"; MAXLEN=896; EPOCHS=3; LR=2e-4; ACC=8
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); MAXLEN=896; EPOCHS=3; LR=2e-4; ACC=8
 L=["AS","AN","ST","TE","CO","OT"]
 DEF=("AS (افتراض): افتراضات أو استنتاجات أو آراء أو أحكام أو ادعاءات تحتاج إلى دعم. "
      "AN (واقعة): دليل عبر تجربة شخصية أو قصة أو حدث واقعي أو مثال ملموس. "

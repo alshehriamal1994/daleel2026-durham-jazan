@@ -1,3 +1,4 @@
+import os
 import json, sys, numpy as np, torch
 from collections import Counter
 from sklearn.metrics import f1_score
@@ -6,7 +7,7 @@ from transformers import (AutoTokenizer, AutoModelForSequenceClassification,
 from datasets import Dataset
 TRACK=sys.argv[1] if len(sys.argv)>1 else "closed"   # closed | open
 L=["AS","AN","ST","TE","CO","OT"]; L2I={l:i for i,l in enumerate(L)}
-W="/home/amal/Desktop/daleel2026"; MAXLEN=384; EPOCHS=8; LR=2e-5; BS=16; FOLDS=5
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); MAXLEN=384; EPOCHS=8; LR=2e-5; BS=16; FOLDS=5
 CV_SEEDS=[42,1,2]; FULL_SEEDS=[42,1,2,3,4,5,6,7]
 DAPT=f"{W}/models/camelbert-dapt-v2"
 rows=[json.loads(l) for l in open(f"{W}/data/train_task_1.jsonl",encoding="utf-8")]+\

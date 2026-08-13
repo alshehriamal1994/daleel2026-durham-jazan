@@ -58,17 +58,30 @@ https://qatardebate.org/programs/academic-programs/daleel2026-shared-task and Co
 Place `train_task_1.jsonl`, `train_task_2.jsonl`, `dev_in.jsonl`, `dev_task_1_ref.jsonl`,
 `dev_task_2_ref.jsonl`, and related files under `data/`.
 
-The scripts in `paper_analysis/` resolve their paths against the repository root, so they
-can be run from any working directory and will look for their inputs in the `data/`,
-`oof/`, and `preds/` layout used in the paper. The training and prediction scripts in
-`src/` still carry an absolute path constant at the top (`W=...`) pointing at the
-directory tree in which they were originally run, and they import the organisers' scorer
-as `task2_scoring`; both need adjusting before those scripts will run elsewhere.
+The scripts in `paper_analysis/` and `src/` resolve their paths against the repository
+root, so they can be run from any working directory and will look for their inputs in the
+`data/`, `oof/`, and `preds/` layout used in the paper. Set `DALEEL_ROOT` if your data
+lives elsewhere:
+
+```bash
+export DALEEL_ROOT=/path/to/your/data/tree
+```
+
+Two further dependencies are on the organisers' Task 2 scorer, which we do not
+redistribute. Five scripts in `src/` (`ensemble_task2.py`, `ensemble_task2_camel.py`,
+`ensemble_task2_marbert.py`, `t2_open_eval.py`, `train_task2_cv.py`) import it as
+`task2_scoring`, so place the organisers' `task2_scoring.py` inside `src/`. Three others
+(`t2_blend_build.py`, `t2_blend_oof_exp.py`, `t2_closed_recal.py`) invoke it as a file and
+read its location from `DALEEL_SCORER`:
+
+```bash
+export DALEEL_SCORER=/path/to/task2_scoring.py
+```
 
 ## Synthetic data
 
 The `data/` directory holds the synthetic training data generated with a proprietary
-proprietary large language model. All of it is machine-generated: the statistics
+large language model. All of it is machine-generated: the statistics
 inside synthetic ST spans are plausible but invented, so the files are unsuitable as
 factual text. It was used in training only, and thresholds and all held-out
 evaluation used real data exclusively. For Task 2 the paragraphs were authored as ordered

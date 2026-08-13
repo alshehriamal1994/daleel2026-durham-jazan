@@ -1,6 +1,7 @@
+import os
 import numpy as np, glob, os, json
 from sklearn.metrics import f1_score, precision_recall_fscore_support
-LABELS=["AS","AN","ST","TE","CO","OT"]; W="/home/amal/Desktop/daleel2026"
+LABELS=["AS","AN","ST","TE","CO","OT"]; W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 files=sorted(glob.glob(f"{W}/oof/task1_*.npz"))
 D=[np.load(f,allow_pickle=True) for f in files]
 Y=D[0]["Y"]; types=D[0]["types"]; oofs=[d["oof"] for d in D]

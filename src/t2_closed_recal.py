@@ -1,12 +1,13 @@
+import os
 import json, pickle, subprocess, tempfile, os, re, numpy as np, torch, torch.nn as nn
 from transformers import AutoTokenizer, AutoModel, get_linear_schedule_with_warmup, set_seed
 from torch.utils.data import DataLoader
 LABELS=["AS","AN","ST","TE","CO","OT"]; L2I={l:i for i,l in enumerate(LABELS)}
-W="/home/amal/Desktop/daleel2026"; MAXLEN=384; EPOCHS=10; LR=3e-5; BS=8; dev=torch.device("cuda")
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); MAXLEN=384; EPOCHS=10; LR=3e-5; BS=8; dev=torch.device("cuda")
 CAM=f"{W}/models/camelbert-dapt-v2"; MAR=f"{W}/models/marbert-dapt-v2"
 GE,GD,ML=400,5,25   # pp3 compaction, tuned on dev, test-confirmed (sub 868218 = 0.729)
 CV_SEEDS=[42,1,2]; FULL_SEEDS=[42,1,2,3,4,5,6,7]; FOLDS=5
-SCORER="/home/amal/Desktop/Daleel/Daleel2026/evaluation/task2_scoring.py"
+SCORER=os.environ.get("DALEEL_SCORER", "")
 rows=[json.loads(l) for l in open(f"{W}/data/train_task_2.jsonl",encoding="utf-8")]+\
      [json.loads(l) for l in open(f"{W}/data/dev_task_2_ref.jsonl",encoding="utf-8")]
 testr=[json.loads(l) for l in open(f"{W}/data/test_in.jsonl",encoding="utf-8")]

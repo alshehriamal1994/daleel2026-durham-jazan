@@ -1,10 +1,11 @@
+import os
 import json, numpy as np, torch
 from collections import Counter
 from transformers import (AutoTokenizer, AutoModelForSequenceClassification,
                           TrainingArguments, Trainer, DataCollatorWithPadding, set_seed)
 from datasets import Dataset
 L=["AS","AN","ST","TE","CO","OT"]; L2I={l:i for i,l in enumerate(L)}
-W="/home/amal/Desktop/daleel2026"; MAXLEN=384; EPOCHS=8; LR=2e-5; BS=16; SEEDS=[42,1,2,3,4]
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); MAXLEN=384; EPOCHS=8; LR=2e-5; BS=16; SEEDS=[42,1,2,3,4]
 DAPT=f"{W}/models/camelbert-dapt"
 # robust median thresholds from the dev-#1 OPEN run (logs_open_sub.txt) — computed from train-only CV, unchanged for test
 THS=np.array([0.425,0.275,0.275,0.375,0.125,0.35])

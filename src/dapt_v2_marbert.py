@@ -1,8 +1,9 @@
+import os
 import json, torch
 from transformers import (AutoTokenizer, AutoModelForMaskedLM, TrainingArguments, Trainer,
                           DataCollatorForLanguageModeling)
 from datasets import Dataset
-W="/home/amal/Desktop/daleel2026"
+W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 texts=[]
 for f in ["data/train_task_1.jsonl","data/dev_in.jsonl","data/test_in.jsonl"]:
     texts+=[json.loads(l)["text"] for l in open(f"{W}/{f}",encoding="utf-8")]
