@@ -157,7 +157,7 @@ One A100 with 80 GB ran Qwen3-32B for about six GPU hours.
 
 ## Licence
 
-The code is released under the MIT licence and the synthetic data under CC-BY-4.0.
+The code is released under the MIT licence (LICENSE) and the synthetic data under CC-BY-4.0 (LICENSE-DATA). The shared-task data released by the organisers is not redistributed here and remains subject to their terms.
 The official task data belongs to the Daleel 2026 organisers and is not included.
 
 ## Citation
