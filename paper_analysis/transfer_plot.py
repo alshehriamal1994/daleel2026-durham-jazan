@@ -23,6 +23,7 @@ model = [
     ("compaction (T2)",  1.4,  1.4),
     ("rare-aug 3$\\times$ (T1)", 1.2,  3.1),
     ("LLM routing (T1)", 1.1,  1.0),
+    ("AraBERT (T1)",     1.1, -0.6),
     ("char blend (T2)",  0.4,  0.5),
 ]
 decision = [
@@ -31,9 +32,10 @@ decision = [
     ("fusion (T1-O)",    2.3,  1.9),
     ("thresholds (T1)",  1.0, -1.4),
     ("recalib. (T2)",    0.9,  0.0),
+    ("global recal (T1)",0.5,  2.5),
 ]
 
-fig, ax = plt.subplots(figsize=(3.03, 2.32))
+fig, ax = plt.subplots(figsize=(3.03, 1.84))
 
 # row layout: headers get their own slot; groups separated by a gap
 rows, ypos, headers = [], [], []

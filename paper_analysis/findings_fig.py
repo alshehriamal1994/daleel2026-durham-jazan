@@ -90,7 +90,7 @@ ax2.set_ylim(0, 100)
 ax2.set_title("Threshold gains do not leave the tuning set", fontsize=8, pad=6)
 ax2.annotate("on held-out\ndata", (-0.021, 74), color=VERM, fontsize=7.5,
              ha="center", va="bottom", linespacing=1.25)
-ax2.annotate("on the\ntuning half", (0.036, 70), color=BLUE, fontsize=7.5,
+ax2.annotate("on the\ntuning subset", (0.036, 70), color=BLUE, fontsize=7.5,
              ha="center", va="bottom", linespacing=1.25)
 ax2.spines[["top", "right"]].set_visible(False)
 ax2.tick_params(length=2.5)
