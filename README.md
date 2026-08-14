@@ -37,14 +37,18 @@ python demo_segment_concat.py
 
 ## Final official results
 
-| Track | Score | Rank |
-|---|---|---|
-| Task 2 Closed | 0.729 overlap-F1 | 6th |
-| Task 2 Open | 0.736 overlap-F1 | 2nd |
-| Task 1 Closed | 0.657 macro-F1 | 5th |
-| Task 1 Open | 0.669 macro-F1 | 2nd |
+Taken from the organisers' official results sheet. Ed and Db are the editorial and debate
+columns; the entrant count excludes the organisers' baseline.
 
-In the development phase we finished first on both Open leaderboards.
+| Track | Score | Ed | Db | Rank | Winner |
+|---|---|---|---|---|---|
+| Task 2 Closed | 0.729 overlap-F1 | 0.610 | 0.762 | 6th of 8 | 0.755 |
+| Task 2 Open | 0.736 overlap-F1 | 0.627 | 0.766 | 2nd of 2 | 0.755 |
+| Task 1 Closed | 0.657 macro-F1 | 0.501 | 0.741 | 5th of 10 | 0.712 |
+| Task 1 Open | 0.669 macro-F1 | 0.501 | 0.762 | 2nd of 3 | 0.712 |
+
+In the development phase we finished first on both Open leaderboards. The evaluation-phase
+ranks above are the final official standings and include submissions made after ours.
 
 ## Setup
 
