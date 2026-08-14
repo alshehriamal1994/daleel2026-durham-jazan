@@ -38,7 +38,7 @@ python demo_segment_concat.py
 ## Final official results
 
 Taken from the organisers' official results sheet. Ed and Db are the editorial and debate
-columns; the entrant count excludes the organisers' baseline.
+columns. The entrant count excludes the organisers' baseline.
 
 | Track | Score | Ed | Db | Rank | Winner |
 |---|---|---|---|---|---|
@@ -110,7 +110,7 @@ construction (paper, Section 3.3).
 | `synth2_all.jsonl` | 2 | 88 span-annotated paragraphs (development phase) |
 | `synth2_v2_built.jsonl` | 2 | 70 further span-annotated paragraphs with verified offsets, giving 158 in total |
 
-The four systems at a glance (solid boxes: Closed track; dashed: Open-track additions):
+The four systems at a glance (solid boxes are the Closed track, dashed the Open-track additions):
 
 <p align="center"><img src="assets/pipeline.png" width="760" alt="Pipeline diagram of the four systems"></p>
 
@@ -157,8 +157,8 @@ The last five need more than this repository provides:
 | `make_figures.py` | Figures 1, 3, 6, 7, and 9, the Arabic examples | headless Chrome and Ghostscript |
 | `mine_interesting.py` | the exploratory scan that located those examples | the organisers' paragraph text |
 | `threshold_transfer_t2.py` | the Task 2 replication of Table 4 | `oof/t2_gold_all.jsonl`, which is organisers' gold and must be regenerated |
-| `ensemble_curve.py` | the seed-variance figures of Appendix A | a GPU; it trains eight seeds |
-| `genre_transfer.py` | Table 8, the size-matched genre experiment | a GPU; it trains nine models |
+| `ensemble_curve.py` | the seed-variance figures of Appendix A | a GPU, and trains eight seeds |
+| `genre_transfer.py` | Table 8, the size-matched genre experiment | a GPU, and trains nine models |
 
 The dev predictions under `preds/` are our own model outputs rather than task data. The
 Task 1 files are label sets. The Task 2 files keep labels and character offsets but not the
