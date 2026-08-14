@@ -14,7 +14,7 @@ import pickle
 from collections import defaultdict
 import numpy as np
 
-W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repository root
+W = os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repository root
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
 GRID = np.round(np.arange(0.20, 0.951, 0.05), 3)
 REPEATS = 200

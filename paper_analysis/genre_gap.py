@@ -7,7 +7,7 @@ import json
 from collections import defaultdict, Counter
 import numpy as np
 
-W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repository root
+W = os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repository root
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
 
 

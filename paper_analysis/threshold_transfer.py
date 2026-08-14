@@ -7,7 +7,7 @@ import os
 import json
 import numpy as np
 
-W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repository root
+W = os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repository root
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
 BASE = [.425, .25, .2, .3, .125, .275]   # development-phase thresholds
 GRID = np.arange(0.05, 0.96, 0.025)

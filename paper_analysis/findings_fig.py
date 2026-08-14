@@ -18,7 +18,7 @@ plt.rcParams.update({
     "pdf.fonttype": 42,
 })
 BLUE, VERM, GRAY = "#0072B2", "#D55E00", "#8a8a8a"
-W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repository root
+W = os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repository root
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
 
 # ---------------- left panel data (from genre_gap.py) ----------------

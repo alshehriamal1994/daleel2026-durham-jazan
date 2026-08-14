@@ -78,6 +78,38 @@ read its location from `DALEEL_SCORER`:
 export DALEEL_SCORER=/path/to/task2_scoring.py
 ```
 
+### What each analysis script needs
+
+`oof/` contains the model outputs behind the paper's analyses: out-of-fold probabilities
+and character offsets, and the saved seed-curve and genre-transfer results. These are our
+own numbers and carry no corpus text, so they are released in full.
+
+With a clone plus the organisers' files under `data/`, these two reproduce their published
+numbers on CPU, in minutes, with no model training:
+
+| Script | Reproduces |
+|---|---|
+| `synth_agreement.py` | blind re-annotation agreement (Appendix B): 79.0% exact, micro-F1 0.937 |
+| `threshold_transfer.py` | the controlled threshold experiment (Table 4), all four rows |
+
+Two more reproduce their numbers but retrain encoders, so they need a CUDA GPU:
+
+| Script | Reproduces | Cost |
+|---|---|---|
+| `genre_transfer.py` | size-matched genre test (Table 8) | retrains 9 small models |
+| `ensemble_curve.py` | seed variance and ensemble size (Appendix A) | retrains 8 seeds |
+
+`ensemble_curve.py` overwrites `oof/ensemble_curve.json` and `oof/ensemble_curve_probs.npy`
+when it runs; copy them first if you want to compare against the released values.
+
+The remaining scripts (`analysis.py`, `error_taxonomy.py`, `genre_gap.py`,
+`make_figures.py`, `mine_interesting.py`, `ranking_analysis.py`, `transfer_plot.py`,
+`findings_fig.py`, `threshold_transfer_t2.py`) additionally read development-set
+predictions from `preds/`, or a merged gold file. We do not ship those, because they embed
+the organisers' paragraph text verbatim; regenerate them with the corresponding scripts in
+`src/`. The scripts are released so that the exact computation behind every reported number
+can be inspected, whether or not it is re-run.
+
 ## Synthetic data
 
 The `data/` directory holds the synthetic training data generated with a proprietary
