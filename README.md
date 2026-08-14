@@ -82,54 +82,16 @@ read its location from `DALEEL_SCORER`:
 export DALEEL_SCORER=/path/to/task2_scoring.py
 ```
 
-### What each analysis script needs
+### What is included alongside the code
 
 `oof/` contains the model outputs behind the paper's analyses: out-of-fold probabilities
 and character offsets, and the saved seed-curve and genre-transfer results. These are our
 own numbers and carry no corpus text, so they are released in full.
 
-With a clone plus the organisers' files under `data/`, these two reproduce their published
-numbers on CPU, in minutes, with no model training:
-
-| Script | Reproduces |
-|---|---|
-| `synth_agreement.py` | blind re-annotation agreement (Appendix B): 79.0% exact, micro-F1 0.937 |
-| `threshold_transfer.py` | the controlled threshold experiment (Table 4), all four rows |
-
-Two more reproduce their numbers but retrain encoders, so they need a CUDA GPU:
-
-| Script | Reproduces | Cost |
-|---|---|---|
-| `genre_transfer.py` | size-matched genre test (Table 8) | retrains 9 small models |
-| `ensemble_curve.py` | seed variance and ensemble size (Appendix A) | retrains 8 seeds |
-
-`ensemble_curve.py` overwrites `oof/ensemble_curve.json` and `oof/ensemble_curve_probs.npy`
-when it runs; copy them first if you want to compare against the released values.
-
 `preds/` holds our development-set predictions. The Task 1 files are label sets only. The
 Task 2 files carry labels and character offsets with the span text removed, because that
 text is the organisers' corpus and is theirs to distribute. Removing it changes no result:
 every analysis below works from labels and offsets.
-
-With a clone plus the organisers' files under `data/`, these reproduce on CPU with no
-model training:
-
-| Script | Reproduces |
-|---|---|
-| `synth_agreement.py` | blind re-annotation agreement (Appendix B) |
-| `threshold_transfer.py` | the controlled threshold experiment (Table 4) |
-| `analysis.py` | Task 1 per-class dev F1 (Table 2) and the bootstrap intervals |
-| `error_taxonomy.py` | Task 2 error taxonomy (Table 5) and Task 1 confusion (Table 6) |
-| `genre_gap.py` | dev F1 by genre and label (Table 7) and the r = 0.89 correlation |
-
-Two more reproduce their numbers but retrain encoders, so they need a CUDA GPU:
-`genre_transfer.py` (Table 8, retrains 9 small models) and `ensemble_curve.py` (Appendix A
-seed curve, retrains 8 seeds). `ensemble_curve.py` overwrites its own cached outputs, so
-copy them first if you want to compare.
-
-`threshold_transfer_t2.py` additionally needs a merged Task 2 gold file, which is the
-organisers' annotation and is not ours to redistribute. Regenerate it from their dev
-reference with the corresponding script in `src/`.
 
 ## Synthetic data
 
@@ -179,22 +141,29 @@ predictions they run on (`oof/t1_recal_oof_closed.npy`) are included here:
 | `threshold_transfer.py` | Table 4, the controlled recalibration experiment |
 | `findings_fig.py` | Figure 5, both post-submission findings |
 
-The remainder need inputs we cannot redistribute, or a GPU:
+Three more need the organisers' files in `data/`, together with our dev predictions,
+which are now included under `preds/`:
+
+| Script | Reproduces |
+|---|---|
+| `analysis.py` | Table 2, per-class dev F1, and the bootstrap intervals |
+| `error_taxonomy.py` | Tables 5 and 6, the span and label error taxonomies |
+| `genre_gap.py` | Table 7 and the editorial-share analysis behind Figure 5 (left) |
+
+The last five need more than this repository provides:
 
 | Script | Reproduces | Also needs |
 |---|---|---|
-| `analysis.py` | Table 2, per-class dev F1, and the bootstrap intervals | our dev predictions under `preds/` |
-| `error_taxonomy.py` | Tables 5 and 6, the span and label error taxonomies | `preds/task2_dev_routed.jsonl` |
-| `genre_gap.py` | the editorial-share analysis behind Figure 5 (left) | `preds/` dev decodes for both encoder families |
-| `make_figures.py` | Figures 1, 3, 6, 7, and 9, the Arabic examples | `preds/`, plus headless Chrome and Ghostscript |
-| `mine_interesting.py` | the exploratory scan that located those examples | `preds/` |
-| `threshold_transfer_t2.py` | the Task 2 replication of Table 4 | `oof/t2_recal_oof.pkl` and `oof/t2_gold_all.jsonl`, the latter being organisers' gold |
+| `make_figures.py` | Figures 1, 3, 6, 7, and 9, the Arabic examples | headless Chrome and Ghostscript |
+| `mine_interesting.py` | the exploratory scan that located those examples | the organisers' paragraph text |
+| `threshold_transfer_t2.py` | the Task 2 replication of Table 4 | `oof/t2_gold_all.jsonl`, which is organisers' gold and must be regenerated |
 | `ensemble_curve.py` | the seed-variance figures of Appendix A | a GPU; it trains eight seeds |
 | `genre_transfer.py` | Table 8, the size-matched genre experiment | a GPU; it trains nine models |
 
-The dev predictions under `preds/` are our own model outputs rather than task data, but
-they are keyed to the organisers' paragraph ids and are not included here. Figure output
-goes to `figs/`.
+The dev predictions under `preds/` are our own model outputs rather than task data. The
+Task 1 files are label sets. The Task 2 files keep labels and character offsets but not the
+span text, which belongs to the organisers' corpus. No analysis here reads that field, and
+removing it leaves every reported number unchanged. Figure output goes to `figs/`.
 
 ## Reproducing the final systems
 
