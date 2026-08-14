@@ -106,13 +106,30 @@ Two more reproduce their numbers but retrain encoders, so they need a CUDA GPU:
 `ensemble_curve.py` overwrites `oof/ensemble_curve.json` and `oof/ensemble_curve_probs.npy`
 when it runs; copy them first if you want to compare against the released values.
 
-The remaining scripts (`analysis.py`, `error_taxonomy.py`, `genre_gap.py`,
-`make_figures.py`, `mine_interesting.py`, `ranking_analysis.py`, `transfer_plot.py`,
-`findings_fig.py`, `threshold_transfer_t2.py`) additionally read development-set
-predictions from `preds/`, or a merged gold file. We do not ship those, because they embed
-the organisers' paragraph text verbatim; regenerate them with the corresponding scripts in
-`src/`. The scripts are released so that the exact computation behind every reported number
-can be inspected, whether or not it is re-run.
+`preds/` holds our development-set predictions. The Task 1 files are label sets only. The
+Task 2 files carry labels and character offsets with the span text removed, because that
+text is the organisers' corpus and is theirs to distribute. Removing it changes no result:
+every analysis below works from labels and offsets.
+
+With a clone plus the organisers' files under `data/`, these reproduce on CPU with no
+model training:
+
+| Script | Reproduces |
+|---|---|
+| `synth_agreement.py` | blind re-annotation agreement (Appendix B) |
+| `threshold_transfer.py` | the controlled threshold experiment (Table 4) |
+| `analysis.py` | Task 1 per-class dev F1 (Table 2) and the bootstrap intervals |
+| `error_taxonomy.py` | Task 2 error taxonomy (Table 5) and Task 1 confusion (Table 6) |
+| `genre_gap.py` | dev F1 by genre and label (Table 7) and the r = 0.89 correlation |
+
+Two more reproduce their numbers but retrain encoders, so they need a CUDA GPU:
+`genre_transfer.py` (Table 8, retrains 9 small models) and `ensemble_curve.py` (Appendix A
+seed curve, retrains 8 seeds). `ensemble_curve.py` overwrites its own cached outputs, so
+copy them first if you want to compare.
+
+`threshold_transfer_t2.py` additionally needs a merged Task 2 gold file, which is the
+organisers' annotation and is not ours to redistribute. Regenerate it from their dev
+reference with the corresponding script in `src/`.
 
 ## Synthetic data
 
