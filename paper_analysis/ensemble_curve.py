@@ -11,7 +11,7 @@ import torch
 from transformers import (AutoTokenizer, AutoModelForSequenceClassification,
                           get_linear_schedule_with_warmup)
 
-W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repository root
+W = os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repository root
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
 L2I = {l: i for i, l in enumerate(LABELS)}
 MODEL = "CAMeL-Lab/bert-base-arabic-camelbert-mix"

@@ -7,7 +7,7 @@ Requires: google-chrome (headless), ghostscript, the task data under data/.
 """
 import json, subprocess, re, os
 
-W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repository root
+W = os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repository root
 OUT = os.path.dirname(os.path.abspath(__file__))
 
 PASTEL = {"AS": "#e6eef9", "AN": "#eaf5e5", "ST": "#fdf0da", "TE": "#faeaea", "CO": "#f5ebf7", "OT": "#f0f0f0"}
