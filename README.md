@@ -128,18 +128,20 @@ Five of them need nothing beyond this repository:
 | Script | Reproduces |
 |---|---|
 | `synth_agreement.py` | the blind re-annotation of the synthetic data: 79.0% exact agreement, micro-F1 0.94, per-label kappa 0.61 (TE) to 1.00 (ST) (Appendix B) |
+| `human_eval/score_human_eval.py` | the blind human check of 30 synthetic paragraphs: micro-F1 0.84, kappa 1.00 (ST) and 0.93 (CO), naturalness 2.93 of 3 (Appendix B). The label-hidden sheet, the filled annotation, the key, and `make_sheet_small.py` sit beside it |
 | `ranking_analysis.py` | which domain decided the shared task, from the organisers' published ranking sheet (Appendix E) |
 | `transfer_plot.py` | Figure 4, promised against delivered for all seventeen audited interventions |
 | `pipeline_fig.py` | Figure 2, the pipeline diagram |
 | `demo_segment_concat.py` | the segment-concatenation demonstration above |
 
-Two more need only the organisers' Task 1 files in `data/`, because the out-of-fold
+Three more need only the organisers' Task 1 files in `data/`, because the out-of-fold
 predictions they run on (`oof/t1_recal_oof_closed.npy`) are included here:
 
 | Script | Reproduces |
 |---|---|
-| `threshold_transfer.py` | Table 4, the controlled recalibration experiment |
+| `threshold_transfer.py` | Table 7, the controlled recalibration experiment |
 | `findings_fig.py` | Figure 5, both post-submission findings |
+| `union_holdout_check.py` | the post-submission check of the three-seed Qwen3-32B union on the controlled holdout, from the retained seed predictions in `oof/` (Appendix A) |
 
 Three more need the organisers' files in `data/`, together with our dev predictions,
 which are now included under `preds/`:
@@ -148,7 +150,7 @@ which are now included under `preds/`:
 |---|---|
 | `analysis.py` | Table 2, per-class dev F1, and the bootstrap intervals |
 | `error_taxonomy.py` | Tables 5 and 6, the span and label error taxonomies |
-| `genre_gap.py` | Table 7 and the editorial-share analysis behind Figure 5 (left) |
+| `genre_gap.py` | Table 10 and the editorial-share analysis behind Figure 5 (left) |
 
 The last five need more than this repository provides:
 
@@ -156,9 +158,9 @@ The last five need more than this repository provides:
 |---|---|---|
 | `make_figures.py` | Figures 1, 3, 6, 7, and 9, the Arabic examples | headless Chrome and Ghostscript |
 | `mine_interesting.py` | the exploratory scan that located those examples | the organisers' paragraph text |
-| `threshold_transfer_t2.py` | the Task 2 replication of Table 4 | `oof/t2_gold_all.jsonl`, which is organisers' gold and must be regenerated |
+| `threshold_transfer_t2.py` | the Task 2 replication of Table 7 | `oof/t2_gold_all.jsonl`, which is organisers' gold and must be regenerated |
 | `ensemble_curve.py` | the seed-variance figures of Appendix A | a GPU, and trains eight seeds |
-| `genre_transfer.py` | Table 8, the size-matched genre experiment | a GPU, and trains nine models |
+| `genre_transfer.py` | Table 11, the size-matched genre experiment | a GPU, and trains nine models |
 
 The dev predictions under `preds/` are our own model outputs rather than task data. The
 Task 1 files are label sets. The Task 2 files keep labels and character offsets but not the

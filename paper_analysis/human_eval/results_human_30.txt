@@ -1,0 +1,16 @@
+Task 1: 30/30 paragraphs labelled by the human
+  exact label-set agreement: 0.500
+  label  n_gen  agree%  kappa      P      R     F1
+  AS        15   0.833  0.667  0.778  0.933  0.848
+  AN         1   0.933  0.474  0.333  1.000  0.500
+  ST         9   1.000  1.000  1.000  1.000  1.000
+  TE         3   0.800  0.412  0.333  1.000  0.500
+  CO        12   0.967  0.932  0.923  1.000  0.960
+  OT        11   0.833  0.661  0.714  0.909  0.800
+  micro-F1 (human vs generator): 0.838   (P = generator labels confirmed by human: 0.742; R = human labels present in generator: 0.961)
+  naturalness: mean 2.93, share rated 3 = 0.93, rated 1 = 0.00
+
+Same 30 paragraphs, second-LLM check vs generator: exact 0.633, micro-F1 0.887
+Human vs second LLM: exact 0.633, micro-F1 0.909
+Human added a label the generator lacked in 14/15 disagreements (TE for restated opponent claims and OT for greetings in debates most often); removed a generator label in 1/15 (#19, AS).
+Naturalness by genre: editorial 2.87, debate 3.00 (1-3 scale). Annotator: first author (native speaker), blind to labels, 28 Aug 2026.

@@ -1,0 +1,267 @@
+{
+ "seed": 2026,
+ "task1": [
+  {
+   "no": 1,
+   "source_id": 71,
+   "type": "debate",
+   "labels": [
+    "CO",
+    "OT"
+   ]
+  },
+  {
+   "no": 2,
+   "source_id": 46,
+   "type": "editorial",
+   "labels": [
+    "CO"
+   ]
+  },
+  {
+   "no": 3,
+   "source_id": 30,
+   "type": "editorial",
+   "labels": [
+    "CO"
+   ]
+  },
+  {
+   "no": 4,
+   "source_id": 167,
+   "type": "editorial",
+   "labels": [
+    "ST",
+    "AS"
+   ]
+  },
+  {
+   "no": 5,
+   "source_id": 194,
+   "type": "debate",
+   "labels": [
+    "ST",
+    "AS",
+    "TE"
+   ]
+  },
+  {
+   "no": 6,
+   "source_id": 117,
+   "type": "editorial",
+   "labels": [
+    "ST",
+    "AS"
+   ]
+  },
+  {
+   "no": 7,
+   "source_id": 271,
+   "type": "debate",
+   "labels": [
+    "CO",
+    "OT"
+   ]
+  },
+  {
+   "no": 8,
+   "source_id": 187,
+   "type": "debate",
+   "labels": [
+    "ST",
+    "AS"
+   ]
+  },
+  {
+   "no": 9,
+   "source_id": 114,
+   "type": "debate",
+   "labels": [
+    "ST",
+    "AS"
+   ]
+  },
+  {
+   "no": 10,
+   "source_id": 1,
+   "type": "debate",
+   "labels": [
+    "CO"
+   ]
+  },
+  {
+   "no": 11,
+   "source_id": 101,
+   "type": "editorial",
+   "labels": [
+    "OT",
+    "AN",
+    "AS"
+   ]
+  },
+  {
+   "no": 12,
+   "source_id": 15,
+   "type": "debate",
+   "labels": [
+    "CO",
+    "AS"
+   ]
+  },
+  {
+   "no": 13,
+   "source_id": 279,
+   "type": "editorial",
+   "labels": [
+    "CO"
+   ]
+  },
+  {
+   "no": 14,
+   "source_id": 51,
+   "type": "debate",
+   "labels": [
+    "CO",
+    "AS"
+   ]
+  },
+  {
+   "no": 15,
+   "source_id": 186,
+   "type": "debate",
+   "labels": [
+    "ST",
+    "AS"
+   ]
+  },
+  {
+   "no": 16,
+   "source_id": 143,
+   "type": "editorial",
+   "labels": [
+    "ST",
+    "AS"
+   ]
+  },
+  {
+   "no": 17,
+   "source_id": 40,
+   "type": "debate",
+   "labels": [
+    "CO"
+   ]
+  },
+  {
+   "no": 18,
+   "source_id": 248,
+   "type": "debate",
+   "labels": [
+    "OT",
+    "TE"
+   ]
+  },
+  {
+   "no": 19,
+   "source_id": 251,
+   "type": "debate",
+   "labels": [
+    "OT",
+    "AS"
+   ]
+  },
+  {
+   "no": 20,
+   "source_id": 54,
+   "type": "editorial",
+   "labels": [
+    "CO"
+   ]
+  },
+  {
+   "no": 21,
+   "source_id": 247,
+   "type": "debate",
+   "labels": [
+    "OT"
+   ]
+  },
+  {
+   "no": 22,
+   "source_id": 72,
+   "type": "editorial",
+   "labels": [
+    "OT"
+   ]
+  },
+  {
+   "no": 23,
+   "source_id": 7,
+   "type": "debate",
+   "labels": [
+    "CO",
+    "AS"
+   ]
+  },
+  {
+   "no": 24,
+   "source_id": 179,
+   "type": "editorial",
+   "labels": [
+    "ST",
+    "AS"
+   ]
+  },
+  {
+   "no": 25,
+   "source_id": 245,
+   "type": "editorial",
+   "labels": [
+    "OT",
+    "AS"
+   ]
+  },
+  {
+   "no": 26,
+   "source_id": 257,
+   "type": "debate",
+   "labels": [
+    "OT",
+    "TE",
+    "AS"
+   ]
+  },
+  {
+   "no": 27,
+   "source_id": 78,
+   "type": "editorial",
+   "labels": [
+    "OT"
+   ]
+  },
+  {
+   "no": 28,
+   "source_id": 228,
+   "type": "editorial",
+   "labels": [
+    "CO"
+   ]
+  },
+  {
+   "no": 29,
+   "source_id": 100,
+   "type": "editorial",
+   "labels": [
+    "OT"
+   ]
+  },
+  {
+   "no": 30,
+   "source_id": 277,
+   "type": "editorial",
+   "labels": [
+    "ST"
+   ]
+  }
+ ],
+ "task2": []
+}
