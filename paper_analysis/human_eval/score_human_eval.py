@@ -35,7 +35,8 @@ if ids:
         P = t / (t + f_) if t + f_ else 0; R = t / (t + n_) if t + n_ else 0; F = 2 * P * R / (P + R) if P + R else 0
         print(f"  {lab:<6}{int(g.sum()):>6}{(g==a).mean():>8.3f}{kappa(g,a):>7.3f}{P:>7.3f}{R:>7.3f}{F:>7.3f}")
     P = tp / (tp + fp) if tp + fp else 0; R = tp / (tp + fn) if tp + fn else 0
-    print(f"  micro-F1 (human vs generator): {2*P*R/(P+R) if P+R else 0:.3f}   (P = generator labels confirmed by human: {P:.3f}; R = human labels present in generator: {R:.3f})")
+    # generator = gold, human = prediction: P counts the human's own labels, R the generator's
+    print(f"  micro-F1 (human vs generator): {2*P*R/(P+R) if P+R else 0:.3f}   (P = human labels present in generator: {P:.3f}; R = generator labels confirmed by human: {R:.3f})")
 if nat1: print(f"  naturalness: mean {np.mean(nat1):.2f}, share rated 3 = {np.mean([x==3 for x in nat1]):.2f}, rated 1 = {np.mean([x==1 for x in nat1]):.2f}")
 
 # ---- Task 2 (segment-level single label)
