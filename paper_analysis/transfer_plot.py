@@ -83,10 +83,10 @@ handles = [
     Line2D([], [], marker="o", ls="", color=BLUE, markeredgecolor="white",
            markersize=5.5, label="realised (leaderboard)"),
 ]
-ax.legend(handles=handles, loc="lower right", frameon=False,
+ax.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, -0.20), ncol=1, frameon=False,
           borderaxespad=0.1, handletextpad=0.15, labelspacing=0.25)
 
 fig.tight_layout(pad=0.15)
 os.makedirs("/home/amal/Desktop/daleel2026/paper/figs", exist_ok=True)
-fig.savefig("/home/amal/Desktop/daleel2026/paper/figs/transfer.pdf")
+fig.savefig("/home/amal/Desktop/daleel2026/paper/figs/transfer.pdf", bbox_inches="tight", pad_inches=0.02)
 print("saved")

@@ -55,7 +55,7 @@ arrow((98, 61), (100, 55.5))
 arrow((168, 61), (130, 55.5), dashed=True)
 
 # ---------------- task 2 (left) ----------------
-band(36, "Task 2, argumentative spans")
+band(33, "Task 2, argumentative spans")
 box(0, 14, 44, 15, "CAMeLBERT-mix $\\times$8\n(editorials)")
 box(50, 14, 44, 15, "MARBERTv2 $\\times$8\n(debates)")
 arrow((70, 42), (24, 29.5))
@@ -82,7 +82,7 @@ ax.text(30, -9.5, "labelled spans", fontsize=FS+0.2, style="italic",
         color=INK, ha="center", va="center")
 ax.text(136, -9.5, "paragraph labels", fontsize=FS+0.2, style="italic",
         color=INK, ha="center", va="center")
-band(36, "Task 1, paragraph labels", x=200, ha="right")
+band(33, "Task 1, paragraph labels", x=200, ha="right")
 
 fig.tight_layout(pad=0.15)
 fig.savefig("/home/amal/Desktop/daleel2026/paper/figs/pipeline.pdf")

@@ -64,11 +64,13 @@ Place `train_task_1.jsonl`, `train_task_2.jsonl`, `dev_in.jsonl`, `dev_task_1_re
 
 The scripts in `paper_analysis/` and `src/` resolve their paths against the repository
 root, so they can be run from any working directory and will look for their inputs in the
-`data/`, `oof/`, and `preds/` layout used in the paper. Set `DALEEL_ROOT` if your data
-lives elsewhere:
+`data/`, `oof/`, and `preds/` layout used in the paper. `DALEEL_ROOT` overrides the
+repository root as a whole rather than the data directory alone, so point it only at a
+tree that also holds `oof/`, `preds/` and `configs/`. To keep the organisers' files
+elsewhere, symlink them into `data/` instead:
 
 ```bash
-export DALEEL_ROOT=/path/to/your/data/tree
+export DALEEL_ROOT=/path/to/a/full/copy/of/this/repository
 ```
 
 Two further dependencies are on the organisers' Task 2 scorer, which we do not
@@ -208,7 +210,7 @@ The official task data belongs to the Daleel 2026 organisers and is not included
 
 ```bibtex
 @inproceedings{durham-jazan-daleel2026,
-  title  = "Durham-Jazan at Daleel 2026: Domain-Routed Ensembles, LLM Augmentation, and the Limits of Decision Rule Tuning for Arabic Argument Mining",
+  title  = "Durham-Jazan at Daleel 2026: Domain-Routed Ensembles, LLM Augmentation, and the Limits of Decision-Rule Tuning for Arabic Argument Mining",
   author = "Alshehri, Amal Saad and Bencomo, Nelly and Babiker, Housam and Atapour-Abarghouei, Amir",
   booktitle = "Proceedings of ArabicNLP 2026",
   year   = "2026"
