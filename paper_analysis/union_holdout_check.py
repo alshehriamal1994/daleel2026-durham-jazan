@@ -17,7 +17,7 @@ Y = np.array([[1.0 if l in set(r["labels"]) else 0.0 for l in L] for r in va])
 ed = np.array([r["type"] == "editorial" for r in va])
 mac = lambda y, p: f1_score(y, p, average="macro", zero_division=0)
 seeds = {k: np.load(f"{W}/oof/t1_llm_holdout_pred_{k}.npy") for k in ["s1", "s2", "s3", "s4"]}
-enc = (np.load(f"{W}/oof/t1_recal_oof_closed.npy")[va_idx] >= np.array(json.load(open(f"{W}/oof/t1_recal_ths_closed.json"))["ths"])).astype(float)
+enc = (np.load(f"{W}/oof/t1_recal_oof_closed.npy")[va_idx] >= np.array(json.load(open(next(q for q in (f"{W}/oof/t1_recal_ths_closed.json", f"{W}/configs/t1_recal_ths_closed.json") if os.path.exists(q))))["ths"])).astype(float)
 route = lambda P: np.where(ed[:, None], P, enc)
 print(f"holdout: {len(va)} paragraphs ({ed.sum()} editorial)")
 print(f"encoder ensemble on both genres: {mac(Y, enc):.3f}")
