@@ -8,8 +8,13 @@ data/train_task_*.jsonl
 data/dev_in.jsonl
 data/dev_task_*.jsonl
 data/test_in.jsonl
-preds/
 models/
+
+# Our own development predictions carry labels and offsets only, no source text,
+# so they are released; anything else under preds/ is not.
+preds/*
+!preds/task1_dev_*.jsonl
+!preds/task2_dev_*.jsonl
 
 __pycache__/
 *.pyc
