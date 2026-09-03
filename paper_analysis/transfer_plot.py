@@ -4,8 +4,6 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 import os
 
-W = os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repository root
-
 plt.rcParams.update({
     "font.family": "serif",
     "font.serif": ["Nimbus Roman", "Times New Roman", "DejaVu Serif"],
@@ -41,7 +39,7 @@ decision = [
     ("global recal (T1)",0.5,  2.5),
 ]
 
-fig, ax = plt.subplots(figsize=(3.03, 1.84))
+fig, ax = plt.subplots(figsize=(3.03, 3.05))
 
 # row layout: headers get their own slot; groups separated by a gap
 rows, ypos, headers = [], [], []
@@ -89,6 +87,6 @@ ax.legend(handles=handles, loc="lower right", frameon=False,
           borderaxespad=0.1, handletextpad=0.15, labelspacing=0.25)
 
 fig.tight_layout(pad=0.15)
-os.makedirs(f"{W}/figs", exist_ok=True)
-fig.savefig(f"{W}/figs/transfer.pdf")
+os.makedirs("/home/amal/Desktop/daleel2026/paper/figs", exist_ok=True)
+fig.savefig("/home/amal/Desktop/daleel2026/paper/figs/transfer.pdf")
 print("saved")
