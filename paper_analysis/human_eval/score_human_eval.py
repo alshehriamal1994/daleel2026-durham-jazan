@@ -1,12 +1,13 @@
 # Score the filled-in blind check sheet against the hidden key.
 # Usage: python3 score_human_eval.py synthetic_data_blind_check_FILLED.xlsx
-import sys, json
+import os, sys, json
 import numpy as np
 from openpyxl import load_workbook
 
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
-key = json.load(open(sys.argv[2] if len(sys.argv) > 2 else "human_eval_key.json", encoding="utf-8"))
-wb = load_workbook(sys.argv[1] if len(sys.argv) > 1 else "synthetic_data_blind_check.xlsx", data_only=True)
+D = os.path.dirname(os.path.abspath(__file__))
+key = json.load(open(sys.argv[2] if len(sys.argv) > 2 else f"{D}/human_eval_key_30.json", encoding="utf-8"))
+wb = load_workbook(sys.argv[1] if len(sys.argv) > 1 else f"{D}/blind_check_30_FILLED.xlsx", data_only=True)
 
 def kappa(g, a):
     po = (g == a).mean(); pe = g.mean() * a.mean() + (1 - g.mean()) * (1 - a.mean())

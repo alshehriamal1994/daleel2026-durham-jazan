@@ -4,6 +4,8 @@ peft
 bitsandbytes
 accelerate
 scikit-learn
+datasets
+openpyxl
 numpy
 sentencepiece
 matplotlib

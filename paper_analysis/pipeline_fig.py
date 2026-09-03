@@ -1,7 +1,6 @@
 # Full-width system diagram (paper, Appendix A).
 # Data and pretraining across the top, then the two task pipelines side by
 # side. Solid = Closed track, dashed blue = Open-track additions.
-import os
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -56,7 +55,7 @@ arrow((98, 61), (100, 55.5))
 arrow((168, 61), (130, 55.5), dashed=True)
 
 # ---------------- task 2 (left) ----------------
-band(36, "Task 2 — argumentative spans")
+band(36, "Task 2, argumentative spans")
 box(0, 14, 44, 15, "CAMeLBERT-mix $\\times$8\n(editorials)")
 box(50, 14, 44, 15, "MARBERTv2 $\\times$8\n(debates)")
 arrow((70, 42), (24, 29.5))
@@ -84,10 +83,8 @@ ax.text(30, -9.5, "labelled spans", fontsize=FS+0.2, style="italic",
         color=INK, ha="center", va="center")
 ax.text(136, -9.5, "paragraph labels", fontsize=FS+0.2, style="italic",
         color=INK, ha="center", va="center")
-band(36, "Task 1 — paragraph labels", x=200, ha="right")
+band(36, "Task 1, paragraph labels", x=200, ha="right")
 
 fig.tight_layout(pad=0.15)
-FIGS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "figs")
-os.makedirs(FIGS, exist_ok=True)
-fig.savefig(os.path.join(FIGS, "pipeline.pdf"))
+fig.savefig("/home/amal/Desktop/daleel2026/paper/figs/pipeline.pdf")
 print("saved")

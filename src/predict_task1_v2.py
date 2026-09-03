@@ -32,7 +32,9 @@ dev=[json.loads(l) for l in open(f"{W}/data/dev_in.jsonl",encoding="utf-8")]
 
 # thresholds: from robust json if given, else in-sample on blended OOF
 if CONFIGS[CFG].get("ths_json"):
-    ths=np.array(json.load(open(f"{W}/oof/{CONFIGS[CFG]['ths_json']}"))["ths"])
+    _j=CONFIGS[CFG]["ths_json"]; _p=f"{W}/oof/{_j}"
+    if not os.path.exists(_p): _p=f"{W}/configs/{_j}"
+    ths=np.array(json.load(open(_p))["ths"])
     print(f"[{CFG}] robust ths={ths.round(3).tolist()}")
 else:
     oof_blend=np.mean([np.load(f"{W}/oof/{n}.npz")["oof"] for n in oof_names],axis=0)

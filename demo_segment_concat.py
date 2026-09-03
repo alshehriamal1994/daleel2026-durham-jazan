@@ -6,9 +6,10 @@ so span-annotated training data needs no tag parsing and no alignment step.
 
 Run:  python demo_segment_concat.py
 """
-import json
+import json, os
 
-record = json.loads(open("data/synth_v2/t2_batch_agent.jsonl", encoding="utf-8").readline())
+W = os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.abspath(__file__)))  # repository root
+record = json.loads(open(f"{W}/data/synth_v2/t2_batch_agent.jsonl", encoding="utf-8").readline())
 
 text, spans, pos = "", [], 0
 for seg in record["segments"]:

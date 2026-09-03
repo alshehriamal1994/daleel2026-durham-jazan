@@ -16,10 +16,10 @@
 # src/t2_closed_recal.py, the procedure under audit; "paper" is an earlier variant
 # that did not re-check span offsets when extending a token run.
 # Post-submission analysis, CPU only.
-import json, pickle, sys
+import json, os, pickle, sys
 import numpy as np
 
-W = "/home/amal/Desktop/daleel2026"
+W = os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repository root
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
 MINLEN = 25
 GRID = np.round(np.arange(0.10, 0.901, 0.05), 3)      # audited grid, 17 points
@@ -112,8 +112,11 @@ def snap(ths):
 
 BLIND_ED = snap([0.6, 0.4, 0.55, 0.5, 0.3, 0.7])
 BLIND_DB = snap([0.45, 0.75, 0.8, 0.75, 0.8, 0.55])
-RECAL_ED = snap(json.load(open(f"{W}/oof/t2_recal_ths.json"))["ths_editorial"])
-RECAL_DB = snap(json.load(open(f"{W}/oof/t2_recal_ths.json"))["ths_debate"])
+_ths = f"{W}/oof/t2_recal_ths.json"          # regenerated here, or the shipped copy
+if not os.path.exists(_ths): _ths = f"{W}/configs/t2_recal_ths.json"
+_recal = json.load(open(_ths))
+RECAL_ED = snap(_recal["ths_editorial"])
+RECAL_DB = snap(_recal["ths_debate"])
 
 
 class Agg:

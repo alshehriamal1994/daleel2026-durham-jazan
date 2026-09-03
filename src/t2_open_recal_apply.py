@@ -7,7 +7,9 @@ W=os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(
 CAM=f"{W}/models/camelbert-dapt-v2"; MAR=f"{W}/models/marbert-dapt-v2"
 GE,GD,ML=400,5,25
 FULL_SEEDS=[42,1,2,3,4,5,6,7]
-cfg=json.load(open(f"{W}/oof/t2_recal_ths.json")); THE=cfg["ths_editorial"]; THD=cfg["ths_debate"]
+_r=f"{W}/oof/t2_recal_ths.json"
+if not os.path.exists(_r): _r=f"{W}/configs/t2_recal_ths.json"
+cfg=json.load(open(_r)); THE=cfg["ths_editorial"]; THD=cfg["ths_debate"]
 rows=[json.loads(l) for l in open(f"{W}/data/train_task_2.jsonl",encoding="utf-8")]+\
      [json.loads(l) for l in open(f"{W}/data/dev_task_2_ref.jsonl",encoding="utf-8")]+\
      [json.loads(l) for l in open(f"{W}/data/synth2_all.jsonl",encoding="utf-8")]+\

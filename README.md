@@ -123,14 +123,14 @@ tables. Run them from anywhere, for example:
 python paper_analysis/threshold_transfer.py
 ```
 
-Five of them need nothing beyond this repository:
+Six of them need nothing beyond this repository:
 
 | Script | Reproduces |
 |---|---|
 | `synth_agreement.py` | the blind re-annotation of the synthetic data: 79.0% exact agreement, micro-F1 0.94, per-label kappa 0.61 (TE) to 1.00 (ST) (Appendix B) |
 | `human_eval/score_human_eval.py` | the blind human check of 30 synthetic paragraphs: micro-F1 0.84, kappa 1.00 (ST) and 0.93 (CO), naturalness 2.93 of 3 (Appendix B). The label-hidden sheet, the filled annotation, the key, and `make_sheet_small.py` sit beside it |
 | `ranking_analysis.py` | which domain decided the shared task, from the organisers' published ranking sheet (Appendix E) |
-| `transfer_plot.py` | Figure 4, promised against delivered for all seventeen audited interventions |
+| `transfer_plot.py` | Figure 4, promised against delivered for all eighteen audited interventions |
 | `pipeline_fig.py` | Figure 2, the pipeline diagram |
 | `demo_segment_concat.py` | the segment-concatenation demonstration above |
 
@@ -143,21 +143,21 @@ predictions they run on (`oof/t1_recal_oof_closed.npy`) are included here:
 | `findings_fig.py` | Figure 5, both post-submission findings |
 | `union_holdout_check.py` | the post-submission check of the three-seed Qwen3-32B union on the controlled holdout, from the retained seed predictions in `oof/` (Appendix A) |
 
-Three more need the organisers' files in `data/`, together with our dev predictions,
+Four more need the organisers' files in `data/`, together with our dev predictions,
 which are now included under `preds/`:
 
 | Script | Reproduces |
 |---|---|
 | `analysis.py` | Table 2, per-class dev F1, and the bootstrap intervals |
-| `error_taxonomy.py` | Tables 5 and 6, the span and label error taxonomies |
+| `error_taxonomy.py` | Tables 8 and 9, the span and label error taxonomies |
 | `genre_gap.py` | Table 10 and the editorial-share analysis behind Figure 5 (left) |
+| `mine_interesting.py` | the exploratory scan that located the paper's Arabic examples |
 
-The last five need more than this repository provides:
+The last four need more than this repository provides:
 
 | Script | Reproduces | Also needs |
 |---|---|---|
-| `make_figures.py` | Figures 1, 3, 6, 7, and 9, the Arabic examples | headless Chrome and Ghostscript |
-| `mine_interesting.py` | the exploratory scan that located those examples | the organisers' paragraph text |
+| `make_figures.py` | Figures 1, 3, 6, 7, 8, and 9, the Arabic examples | headless Chrome and Ghostscript |
 | `threshold_transfer_t2.py` | the Task 2 replication of Table 7 | `oof/t2_gold_all.jsonl`, which is organisers' gold and must be regenerated |
 | `ensemble_curve.py` | the seed-variance figures of Appendix A | a GPU, and trains eight seeds |
 | `genre_transfer.py` | Table 11, the size-matched genre experiment | a GPU, and trains nine models |
@@ -165,16 +165,23 @@ The last five need more than this repository provides:
 The dev predictions under `preds/` are our own model outputs rather than task data. The
 Task 1 files are label sets. The Task 2 files keep labels and character offsets but not the
 span text, which belongs to the organisers' corpus. No analysis here reads that field, and
-removing it leaves every reported number unchanged. Figure output goes to `figs/`.
+removing it leaves every reported number unchanged. Figure output goes to `figs/`, and the
+Arabic examples to `paper_analysis/`.
 
 ## Reproducing the final systems
 
 | System | Key scripts |
 |---|---|
-| Task 2 Closed (0.729) | `train_task2_cv.py`, then `ensemble_task2_camel.py` and `ensemble_task2_marbert.py`, then `test_task2_closed_v3.py` for the domain-routed ensemble, with span compaction from `t2_closed_recal.py` |
-| Task 2 Open (0.736) | the above plus synthetic spans (`predict_task2_open.py`) and the char-level blend (`t2_blend_build.py`) |
-| Task 1 Closed (0.657) | `dapt.py` and `dapt_v2.py` for domain-adaptive pretraining, `backtranslate.py` and `rare_bt_gen.py` for augmentation, `dapt_rare_submit.py` for the encoder ensemble, and `t1_llm_sft.py` for the Qwen3-32B routing |
-| Task 1 Open (0.669) | the above plus synthetic paragraphs (`open_submit.py`) and span fusion from Task 2 |
+| Task 2 Closed (0.729) | `dapt_v2.py` and `dapt_v2_marbert.py` for the encoders, `train_task2_cv.py` with `ensemble_task2_camel.py` and `ensemble_task2_marbert.py` for the per-domain thresholds, then `test_task2_closed_v3.py` for the domain-routed decode, which it writes uncompacted. The span compaction that earned the submitted score is the decoder inside `t2_closed_recal.py` |
+| Task 2 Open (0.736) | the same encoders, then `t2_open_recal_apply.py` to add the synthetic spans and save test probabilities, then `t2_blend_build.py` for the char-level blend and the compaction |
+| Task 1 Closed (0.657) | `dapt_v2.py` for domain-adaptive pretraining, `backtranslate.py`, `backtranslate_multi.py` and `dev_bt_gen.py` for the back-translations, `t1_recal.py closed` for the encoder ensemble and its recalibrated thresholds, `t1_marbert_route.py` for the debate probability blend, and `t1_llm_sft.py` for one Qwen3-32B seed |
+| Task 1 Open (0.669) | the same, with `t1_recal.py open` adding the synthetic paragraphs, and per-class span fusion from Task 2 on the debates |
+
+The two Task 1 entries cannot be reproduced here. Their editorial predictions are the union
+of three Qwen3-32B seeds, and `t1_llm_sft.py` trains and predicts one seed at a fixed seed
+value, so the seed runs, the union, and the routing step are not released. The Task 1 Open
+span fusion is released as rule configurations only. The union rule can still be checked on
+the retained holdout predictions with `paper_analysis/union_holdout_check.py`.
 
 The `configs/` directory holds the evaluation-phase decoding thresholds and rule
 configurations referenced in the paper's Appendix A: the recalibrated Task 1 sets

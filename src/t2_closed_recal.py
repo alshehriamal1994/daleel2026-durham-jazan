@@ -11,7 +11,7 @@ SCORER=os.environ.get("DALEEL_SCORER", "")
 rows=[json.loads(l) for l in open(f"{W}/data/train_task_2.jsonl",encoding="utf-8")]+\
      [json.loads(l) for l in open(f"{W}/data/dev_task_2_ref.jsonl",encoding="utf-8")]
 testr=[json.loads(l) for l in open(f"{W}/data/test_in.jsonl",encoding="utf-8")]
-camcfg=json.load(open(f"{W}/oof/task2_camel_ens.json")); marcfg=json.load(open(f"{W}/oof/task2_marbert_deb.json"))
+camcfg,marcfg=[json.load(open(f"{W}/oof/{n}" if os.path.exists(f"{W}/oof/{n}") else f"{W}/configs/{n}")) for n in ("task2_camel_ens.json","task2_marbert_deb.json")]
 OLD_THE=list(camcfg["ths_editorial"]); OLD_THD=list(marcfg["ths_debate"])
 class Net(nn.Module):
     def __init__(s,m):

@@ -55,7 +55,9 @@ for fold,(tr,va) in enumerate(skf.split(texts,strat)):
 np.save(f"{W}/oof/t1_marbert_oof.npy",oof)
 # per-domain diagnosis vs CAMeLBERT OOF at matched thresholds (report only)
 cam=np.load(f"{W}/oof/t1_recal_oof_closed.npy")
-ths=np.array(json.load(open(f"{W}/oof/t1_recal_ths_closed.json"))["ths"])
+_c=f"{W}/oof/t1_recal_ths_closed.json"
+if not os.path.exists(_c): _c=f"{W}/configs/t1_recal_ths_closed.json"
+ths=np.array(json.load(open(_c))["ths"])
 ed=np.array([t=="editorial" for t in types])
 for name,o in [("CAM",cam),("MAR",oof),("MEAN",(cam+oof)/2)]:
     P=(o>=ths).astype(int)

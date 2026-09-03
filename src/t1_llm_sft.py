@@ -85,7 +85,9 @@ if MODE=="holdout":
     def mac(y,p): return f1_score(y,p,average="macro",zero_division=0)
     print(f"LLM holdout macro: overall {mac(Y,P):.4f} | ed {mac(Y[ed],P[ed]):.4f} | db {mac(Y[~ed],P[~ed]):.4f}",flush=True)
     cam=np.load(f"{W}/oof/t1_recal_oof_closed.npy")
-    ths=np.array(json.load(open(f"{W}/oof/t1_recal_ths_closed.json"))["ths"])
+    _c=f"{W}/oof/t1_recal_ths_closed.json"
+    if not os.path.exists(_c): _c=f"{W}/configs/t1_recal_ths_closed.json"
+    ths=np.array(json.load(open(_c))["ths"])
     CP=(cam[va_idx]>=ths).astype(int)
     print(f"CAM same rows      : overall {mac(Y,CP):.4f} | ed {mac(Y[ed],CP[ed]):.4f} | db {mac(Y[~ed],CP[~ed]):.4f}",flush=True)
     np.save(f"{W}/oof/t1_llm_holdout_pred.npy",P); np.save(f"{W}/oof/t1_llm_holdout_idx.npy",np.array(va_idx))

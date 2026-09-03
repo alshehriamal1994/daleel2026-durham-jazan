@@ -7,7 +7,9 @@ GE,GD,ML=400,5,25
 rows=[json.loads(l) for l in open(f"{W}/data/train_task_2.jsonl",encoding="utf-8")]+\
      [json.loads(l) for l in open(f"{W}/data/dev_task_2_ref.jsonl",encoding="utf-8")]
 d=pickle.load(open(f"{W}/oof/t2_recal_oof.pkl","rb"))
-cfg=json.load(open(f"{W}/oof/t2_recal_ths.json")); THE=np.array(cfg["ths_editorial"]); THD=np.array(cfg["ths_debate"])
+_r=f"{W}/oof/t2_recal_ths.json"
+if not os.path.exists(_r): _r=f"{W}/configs/t2_recal_ths.json"
+cfg=json.load(open(_r)); THE=np.array(cfg["ths_editorial"]); THD=np.array(cfg["ths_debate"])
 gold_all=f"{W}/oof/t2_gold_all.jsonl"
 def charprobs(probs,offs,n):
     cp=np.zeros((n,6),dtype=np.float32)

@@ -1,11 +1,11 @@
 # Small blind human check: 30 Task 1 synthetic paragraphs (15 editorial, 15 debate), labels hidden.
-import json, random, re
+import json, os, random, re
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.worksheet.datavalidation import DataValidation
 from openpyxl.utils import get_column_letter
 
-ROOT = "/home/amal/Desktop/daleel2026/release"
+ROOT = os.environ.get("DALEEL_ROOT", os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))  # repository root
 LABELS = ["AS", "AN", "ST", "TE", "CO", "OT"]
 rng = random.Random(2026)
 t1 = []
